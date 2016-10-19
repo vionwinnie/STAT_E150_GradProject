@@ -1,0 +1,397 @@
+Country,Code
+USA,20800
+China,6400
+Japan,11200
+Germany,9200
+France,8800
+Brazil,5200
+UK,20600
+Italy,11000
+Russia,16600
+India,10400
+Canada,5900
+Australia,3700
+Spain,18500
+Mexico,13600
+South Korea,16300
+Indonesia,10500
+Turkey,20100
+Saudi Arabia,17400
+Argentina,3500
+South Africa,18400
+Austria,3800
+Belgium,4500
+Cyprus,7200
+Denmark,7500
+Finland,8700
+France,8800
+Germany,9200
+Greece,9400
+Hungary,10200
+Iceland,10300
+Ireland,10800
+Italy,11000
+Luxembourg,12600
+Netherlands,14600
+Norway,15100
+Portugal,16100
+San Marino,17200
+Spain,18500
+Sweden,19000
+Switzerland,19100
+Turkey,20100
+UK,20600
+Albania,3100
+Bosnia and Herzegovina,5000
+Bulgaria,5400
+Croatia,7000
+Czech Republic,7300
+Kosovo,NA
+Macedonia,19500
+Montenegro,14000
+Poland,16000
+Romania,16500
+Serbia,17600
+Slovak Republic,18000
+Slovenia,18100
+Armenia,3600
+Azerbaijan,3900
+Belarus,4400
+Estonia,8400
+Georgia,9100
+Kazakhstan,11400
+Kyrgyzstan,11800
+Latvia,12000
+Lithuania,12500
+Moldova,16400
+Russia,16600
+Tajikistan,19300
+Turkmenistan,20200
+Ukraine,20400
+Uzbekistan,21000
+Brunei,5300
+Cambodia,5700
+China,6400
+Hong Kong,NA
+Indonesia,10500
+Japan,11200
+Laos,11900
+Malaysia,12900
+Mongolia,13900
+Myanmar,14300
+North Korea,7400
+Philippines,15900
+Singapore,17900
+South Korea,16300
+Thailand,19400
+Vietnam,21300
+Afghanistan,3000
+Bangladesh,4200
+Bhutan,4800
+India,10400
+Sri Lanka,18600
+Maldives,13000
+Nepal,14500
+Pakistan,15300
+Algeria,3200
+Bahrain,4100
+Djibouti,7600
+Egypt,8000
+Iran,10600
+Iraq,10700
+Israel,10900
+Jordan,11300
+Kuwait,11700
+Lebanon,12100
+Libya,12400
+Malta,13200
+Morocco,14100
+Oman,15200
+Qatar,16200
+Saudi Arabia,17400
+Syria,19200
+Tunisia,20000
+UAE,20500
+Yemen,21400
+Angola,3300
+Burundi,5600
+Benin,4700
+Burkina Faso,5500
+Botswana,5100
+Central African Republic,6100
+Cameroon,5800
+Congo,6700
+Congo-Brazzaville,NA
+Comoros,6600
+Cape Verde,6000
+Eritrea,8300
+Ethiopia,8500
+Gabon,8900
+Ghana,9300
+Guinea,9700
+Gambia,9000
+Guinea-Bissau,9800
+Equatorial Guinea,8200
+Ivory Coast,6900
+Kenya,11500
+Liberia,12300
+Lesotho,12200
+Madagascar,12700
+Mali,13100
+Mozambique,14200
+Mauritania,13400
+Mauritius,13500
+Malawi,12800
+Namibia,14400
+Niger,14900
+Nigeria,15000
+Rwanda,16700
+Sudan,18700
+Senegal,17500
+Sierra Leone,17800
+Somalia,18300
+South Sudan,NA
+Sao Tome and Principe,17300
+Swaziland,18900
+Seychelles,17700
+Chad,6200
+Togo,19700
+Tanzania,20700
+Uganda,20300
+South Africa,18400
+Zambia,21500
+Zimbabwe,21600
+USA,20800
+Canada,5900
+Mexico,13600
+Antigua and Barbuda,3400
+The Bahamas,4000
+Barbados,4300
+Cuba,7100
+Dominica,7700
+Dominican Republic,7800
+Grenada,9500
+Haiti,10000
+Jamaica,11100
+Saint Kitts and Nevis,16800
+Saint Lucia,16900
+Saint Vincent and the Grenadines,17000
+Trinidad and Tobago,19900
+Belize,4600
+Costa Rica,6800
+El Salvador,8100
+Guatemala,9600
+Honduras,10100
+Nicaragua,14800
+Panama,15500
+Argentina,3500
+Bolivia,4900
+Brazil,5200
+Chile,6300
+Colombia,6500
+Ecuador,7900
+Guyana,9900
+Paraguay,15700
+Peru,15800
+Suriname,18800
+Uruguay,20900
+Venezuela,21200
+Australia,3700
+Fiji,8600
+Kiribati,11600
+New Zealand,14700
+Papua New Guinea,15600
+Samoa,17100
+Solomon Islands,18200
+Timor-Leste,19600
+Tonga,19800
+Tuvalu,20210
+Vanuatu,21100
+Afghanistan,3000
+Albania,3100
+Algeria,3200
+Angola,3300
+Antigua and Barbuda,3400
+Argentina,3500
+Armenia,3600
+Australia,3700
+Austria,3800
+Azerbaijan,3900
+Bahrain,4100
+Bangladesh,4200
+Barbados,4300
+Belarus,4400
+Belgium,4500
+Belize,4600
+Benin,4700
+Bhutan,4800
+Bolivia,4900
+Bosnia and Herzegovina,5000
+Botswana,5100
+Brazil,5200
+Brunei,5300
+Bulgaria,5400
+Burkina Faso,5500
+Burundi,5600
+Cambodia,5700
+Cameroon,5800
+Canada,5900
+Cape Verde,6000
+Central African Republic,6100
+Chad,6200
+Chile,6300
+China,6400
+Colombia,6500
+Comoros,6600
+Congo,6700
+Congo-Brazzaville,NA
+Costa Rica,6800
+Croatia,7000
+Cuba,7100
+Cyprus,7200
+Czech Republic,7300
+Denmark,7500
+Djibouti,7600
+Dominica,7700
+Dominican Republic,7800
+Ecuador,7900
+Egypt,8000
+El Salvador,8100
+Equatorial Guinea,8200
+Eritrea,8300
+Estonia,8400
+Ethiopia,8500
+Fiji,8600
+Finland,8700
+France,8800
+Gabon,8900
+Gambia,9000
+Georgia,9100
+Germany,9200
+Ghana,9300
+Greece,9400
+Grenada,9500
+Guatemala,9600
+Guinea,9700
+Guinea-Bissau,9800
+Guyana,9900
+Haiti,10000
+Honduras,10100
+Hong Kong,NA
+Hungary,10200
+Iceland,10300
+India,10400
+Indonesia,10500
+Iran,10600
+Iraq,10700
+Ireland,10800
+Israel,10900
+Italy,11000
+Ivory Coast,6900
+Jamaica,11100
+Japan,11200
+Jordan,11300
+Kazakhstan,11400
+Kenya,11500
+Kiribati,11600
+Kosovo,NA
+Kuwait,11700
+Kyrgyzstan,11800
+Laos,11900
+Latvia,12000
+Lebanon,12100
+Lesotho,12200
+Liberia,12300
+Libya,12400
+Lithuania,12500
+Luxembourg,12600
+Macedonia,19500
+Madagascar,12700
+Malawi,12800
+Malaysia,12900
+Maldives,13000
+Mali,13100
+Malta,13200
+Mauritania,13400
+Mauritius,13500
+Mexico,13600
+Moldova,16400
+Mongolia,13900
+Montenegro,14000
+Morocco,14100
+Mozambique,14200
+Myanmar,14300
+Namibia,14400
+Nepal,14500
+Netherlands,14600
+New Zealand,14700
+Nicaragua,14800
+Niger,14900
+Nigeria,15000
+North Korea,7400
+Norway,15100
+Oman,15200
+Pakistan,15300
+Panama,15500
+Papua New Guinea,15600
+Paraguay,15700
+Peru,15800
+Philippines,15900
+Poland,16000
+Portugal,16100
+Qatar,16200
+Romania,16500
+Russia,16600
+Rwanda,16700
+Saint Kitts and Nevis,16800
+Saint Lucia,16900
+Saint Vincent and the Grenadines,17000
+Samoa,17100
+San Marino,17200
+Sao Tome and Principe,17300
+Saudi Arabia,17400
+Senegal,17500
+Serbia,17600
+Seychelles,17700
+Sierra Leone,17800
+Singapore,17900
+Slovak Republic,18000
+Slovenia,18100
+Solomon Islands,18200
+Somalia,18300
+South Africa,18400
+South Korea,16300
+South Sudan,NA
+Spain,18500
+Sri Lanka,18600
+Sudan,18700
+Suriname,18800
+Swaziland,18900
+Sweden,19000
+Switzerland,19100
+Syria,19200
+Tajikistan,19300
+Tanzania,20700
+Thailand,19400
+The Bahamas,4000
+Timor-Leste,19600
+Togo,19700
+Tonga,19800
+Trinidad and Tobago,19900
+Tunisia,20000
+Turkey,20100
+Turkmenistan,20200
+Tuvalu,20210
+UAE,20500
+Uganda,20300
+UK,20600
+Ukraine,20400
+Uruguay,20900
+USA,20800
+Uzbekistan,21000
+Vanuatu,21100
+Venezuela,21200
+Vietnam,21300
+Yemen,21400
+Zambia,21500
+Zimbabwe,21600
