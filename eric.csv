@@ -1,0 +1,193 @@
+Country,Male,Female,Mixed
+Ethiopia,20,20.7,20.3
+Eritrea,20.2,20.8,20.5
+Bangladesh,20.5,20.7,20.6
+Burundi,20.4,21,20.7
+Timor-Leste,21.1,20.7,20.9
+Madagascar,20.9,21,20.9
+Viet Nam,21,21.2,21.1
+Afghanistan,21.1,21.2,21.2
+Niger,21.1,21.9,21.5
+Cambodia,21.5,21.6,21.5
+India,21.5,21.7,21.6
+Uganda,20.8,22.6,21.7
+Rwanda,21.1,22.3,21.7
+Nepal,22,21.4,21.7
+Somalia,21.2,22.3,21.7
+NorthKorea,21.8,21.8,21.8
+Burkina Faso,21.9,21.8,21.8
+SouthKorea,21.8,22.1,21.9
+Chad,21.9,22.2,22
+Mozambique,21.4,22.7,22.1
+Lao,21.9,22.3,22.1
+Central African Republic,21.5,22.8,22.2
+Zambia,21.3,23.4,22.3
+Myanmar,21.7,22.8,22.3
+Mali,22.3,22.6,22.4
+Sierra Leone,21.8,23.3,22.5
+Sri Lanka,22,23,22.5
+Indonesia,21.9,23,22.5
+Malawi,22,22.9,22.5
+Guinea,22,23,22.5
+Kenya,21.7,23.6,22.6
+Japan,23.5,21.8,22.6
+Senegal,21.6,23.8,22.7
+Tanaznia,22,23.5,22.8
+Guinea-Bissau,22,23.5,22.8
+Philippines,22.6,23.1,22.9
+Togo,22.2,23.6,22.9
+Congo,22.2,23.7,23
+Nigeria,22.4,23.7,23.1
+Benin,22.4,23.8,23.1
+Djibouti,22.6,23.7,23.2
+Zimbabwe,21.7,24.8,23.3
+Bhutan,23,23.7,23.3
+Cote d'Ivoire,23,23.8,23.4
+China,23.6,23.3,23.4
+Pakistan,23,24,23.4
+Gambia,22.5,24.5,23.5
+Angola,23.1,24.1,23.6
+Haiti,23.8,23.5,23.6
+South Korea,24,23.1,23.6
+Singapore,24.1,23.1,23.6
+Liberia,23.1,24.3,23.7
+Thailand,23.2,24.4,23.8
+Ghana,23.1,24.6,23.8
+Comoros,22.9,24.6,23.8
+Namibia,22.5,25.3,23.9
+Cameroon,23.6,24.7,24.2
+Cabo Verde,23.6,25,24.3
+Botswana,22.5,26.2,24.4
+Sao Tome and Principe,23.6,25.2,24.4
+Mauritania,23,26,24.5
+Lesotho,22.4,26.8,24.6
+Maldives,23.9,25.7,24.8
+South Sudan,23.4,26.3,24.9
+Tajikistan,25.1,24.8,24.9
+Sudan,23.4,26.3,24.9
+Papua New Guinea,24.8,25.3,25
+Malaysia,24.6,25.3,25
+Gabon,24.3,25.9,25.1
+Equatorial Guinea,24.7,25.6,25.1
+Denmark,25.9,24.4,25.1
+Switzerland,26.4,23.9,25.1
+Morocco,24.8,25.6,25.2
+France,25.9,24.5,25.2
+Romania,25.4,24.9,25.2
+Mauritius,24.7,25.9,25.3
+Netherlands,25.7,24.9,25.3
+Austria,26.2,24.3,25.3
+Croatia,26.2,24.5,25.3
+Estonia,26.7,24.3,25.4
+Mongolia,24.9,25.8,25.4
+Belgium,26.1,24.8,25.4
+Solomon Islands,24.5,26.3,25.4
+Paraguay,25.3,25.6,25.4
+Yemen,24.8,26.2,25.5
+Bolivia,24.2,26.8,25.5
+Sweden,26.4,24.8,25.6
+Colombia,25,26.2,25.6
+Uzbekistan,25.4,25.7,25.6
+Brazil,25.5,25.7,25.6
+Macedonia,26.1,25.2,25.7
+Serbia,26.2,25.2,25.7
+Cuba,25.1,26.3,25.7
+Latvia,26.4,25.1,25.7
+Guyana,24.6,27.1,25.8
+Bulgaria,26.4,25.2,25.8
+Turkmenistan,25.8,25.8,25.8
+Kyrgyzstan,25.2,26.4,25.8
+Iran,25,26.8,25.9
+Iceland,26.6,25.1,25.9
+Italy,26.6,25.2,25.9
+Peru,25.2,26.6,25.9
+Finland,26.4,25.4,25.9
+Montenegro,26.2,25.5,25.9
+Albania,26.3,25.6,25.9
+Algeria,25.1,26.7,25.9
+Ukraine,26.1,25.8,25.9
+Norway,26.6,25.1,25.9
+Honduras,25.2,26.9,26
+Brunei Darussalam,25.5,26.5,26
+Bosnia,26.2,25.7,26
+Vanuatu,25.5,26.6,26
+Guatemala,25.6,26.7,26.1
+Israel,26,26.1,26.1
+Germany,26.8,25.5,26.1
+Portugal,26.5,25.7,26.1
+Poland,26.7,25.7,26.1
+Swaziland,23.8,28.4,26.2
+Dominican Republic,25.5,26.9,26.2
+Russia,25.7,26.7,26.2
+Hungary,27.3,25.2,26.2
+Slovakia,27,25.6,26.3
+Tunisia,25.5,27.1,26.3
+Armenia,25.5,27.1,26.3
+Lithuania,27,26,26.4
+Grenada,24.8,28.1,26.4
+Uruguay,26.3,26.6,26.4
+Belarus,26.6,26.2,26.4
+Luxembourg,27.3,25.4,26.4
+Seychelles,25.2,27.7,26.4
+Moldova,26,27,26.5
+Dominica,24.6,28.5,26.5
+Oman,26.3,26.8,26.5
+Costa Rica,26.4,26.7,26.5
+Ecuador,26,27.3,26.6
+Spain,27.2,26,26.6
+Panama,26,27.2,26.6
+Nicaragua,25.7,27.4,26.6
+Slovenia,27.2,26.2,26.7
+Azerbaijan,25.9,27.6,26.7
+St. Vincent,25.9,27.6,26.8
+Cyprus,27.4,26.2,26.8
+Czech Republic,27.6,26.1,26.8
+Suriname,26,27.7,26.8
+Georgia,26.7,26.8,26.8
+Australia,27.3,26.6,26.9
+Jamaica,25.1,28.6,26.9
+South Africa,25,28.7,26.9
+Canada,27.4,26.6,27
+Kazakhstan,26.8,27.1,27
+El Salvador,26.4,27.6,27
+Venezeula,27.1,26.9,27
+UK,27.2,26.9,27
+Malta,27.3,26.8,27.1
+Fiji,25.9,28.3,27.1
+Argentina,27.4,27.1,27.2
+Ireland,27.7,26.8,27.2
+Lebanon,27.4,27.1,27.3
+Andorra,27.5,27.1,27.3
+Greece,27.3,27.2,27.3
+Turkey,26.7,28.2,27.5
+Iraq,26.7,28.4,27.5
+Chile,27.2,27.7,27.5
+New Zealand,27.7,27.5,27.6
+Syria,26.8,28.6,27.7
+Mexico,27.2,28.3,27.8
+Bahrain,27.5,28.3,27.8
+Antigua and Barbuda,26.8,28.9,27.9
+Trinidad and Tobago,27.2,28.8,28
+Libya,26.8,29.2,28
+Saudi Arabia,27.8,28.4,28.1
+Barbados,26.8,29.5,28.2
+Belize,27.1,29.8,28.4
+Bahamas,27.5,29.2,28.4
+USA,28.5,28.5,28.5
+Qatar,28.3,29.6,28.6
+United Arab Emirates,28.2,29.5,28.6
+Jordan,27.8,29.5,28.6
+Egypt,27.3,30.2,28.7
+Saint Lucia,28.1,29.4,28.8
+Tuvalu,28.5,29.7,29.1
+Marshall Islands,28.3,30,29.1
+Micronesia,27.6,30.8,29.2
+Saint Kitts and Nevis,28,30.3,29.2
+Kiribati,28.6,30.3,29.4
+Palau,29.2,29.5,29.4
+Kuwait,29,30.4,29.5
+Samoa,29.7,33.1,31.4
+Tonga,30.3,33.3,31.8
+Cook Islands,31.7,32.4,32
+Niue,31.1,32.9,32
+Nauru,32.2,33,32.6
