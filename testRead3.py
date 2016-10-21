@@ -29,9 +29,9 @@ def loadData_csv(filepath: str) -> list:
 ###############################################################################
 def adjCountryName(nameCountry: str) -> str:
     if len(nameCountry) > 6 and nameCountry[0:6] == "United":
-        if len(nameCountry) >= 14 and nameCountry[7:13] == "States":
+        if len(nameCountry) >= 12 and nameCountry[7:13] == "States":
             nameCountry = "USA"
-        elif len(nameCountry) >= 15 and nameCountry[7:14] == "Kingdom":
+        elif len(nameCountry) >= 13 and nameCountry[7:14] == "Kingdom":
             nameCountry = "UK"
     elif nameCountry == "Russian Federation":
         nameCountry = "Russia"
@@ -256,8 +256,8 @@ def getData_struct30(dat: list, iDS: int,
                      idxRaw_country: int,
                      idxRaw_year: int,
                      idxRaw_data: int,
-                     idxRaw_indicator,
-                     stringIndicator ) -> list:
+                     idxRaw_indicator: int,
+                     stringIndicator: str ) -> list:
     # Data is organized by indicator, then country then year
 
     # Go through each row and match desired indicator
@@ -345,7 +345,7 @@ def getData_struct40(dat: list, iDS: int,
             nameCountry = dat_raw[iRow][idxRaw_country]
 
             nameCountry = adjCountryName(nameCountry)
-
+            
             # Make sure country exists within WHO country list
             for idxWHO in range(1, len(dat_WHO_country)):
                 if nameCountry == dat_WHO_country[idxWHO][idxWHO_country]:
@@ -354,11 +354,17 @@ def getData_struct40(dat: list, iDS: int,
                     codeCountry = dat_WHO_country[idxWHO][idxWHO_code]
                     for iCode in range(len(listCountryCode)):
                         if codeCountry == listCountryCode[iCode]:
-                            # Found match by code
+                            # Found match by code                            
                             # Ready to go through years
-                            for iYR in range(idxRaw_data, len(dat_raw[0])):
-                                curYear = int( dat_raw[idxRaw_year][iYR] )
-
+                            for iYR in range(idxRaw_data, min( len(dat_raw[idxRaw_year]) , len(dat_raw[iRow]) ) ):
+                                if isinstance( dat_raw[idxRaw_year][iYR] ,str):
+                                    try:
+                                        curYear = int( dat_raw[idxRaw_year][iYR] )
+                                    except:
+                                        curYear = 0
+                                else:
+                                    curYear = dat_raw[idxRaw_year][iYR]
+                                
                                 if curYear <= yearThresStart and curYear >= yearThresEnd:
                                     # Define dat indicies
                                     idxDat = yearThresStart - curYear
@@ -399,6 +405,92 @@ def getData_struct40(dat: list, iDS: int,
 ###############################################################################
 ###############################################################################
 ###############################################################################
+def getData_struct41(dat: list, iDS: int,
+                     dat_raw: list,
+                     idxRaw_country: int,
+                     idxRaw_year: int,
+                     idxRaw_data: int,
+                     idxRaw_indicator: int,
+                     stringIndicator: str ) -> list:
+    # Data is organized by indicator, then country, then year is columns (plus parsing of years)
+
+    # 
+    minColWidth = max(idxRaw_country,idxRaw_data)
+    
+    for iRow in range(1+idxRaw_year,len(dat_raw)):
+        # Check if indicator matches
+        if len(dat_raw[iRow]) >= minColWidth:
+            if stringIndicator == dat_raw[iRow][idxRaw_indicator]:
+                # Match found!
+                nameCountry = dat_raw[iRow][idxRaw_country]
+
+                nameCountry = adjCountryName(nameCountry)
+                
+                # Make sure country exists within WHO country list
+                for idxWHO in range(1, len(dat_WHO_country)):
+                    if nameCountry == dat_WHO_country[idxWHO][idxWHO_country]:
+                        # Found match by name
+                        #   Find match in dat for code
+                        codeCountry = dat_WHO_country[idxWHO][idxWHO_code]
+                        for iCode in range(len(listCountryCode)):
+                            if codeCountry == listCountryCode[iCode]:
+                                # Found match by code                            
+                                # Ready to go through years
+                                for iYR in range(idxRaw_data, min( len(dat_raw[idxRaw_year]) , len(dat_raw[iRow]) ) ):
+                                    if isinstance( dat_raw[idxRaw_year][iYR] ,str):
+                                        if (' ' in dat_raw[idxRaw_year][iYR]):
+                                            try:
+                                                curYear = int( dat_raw[idxRaw_year][iYR].split(' ', 1)[0] )
+                                            except:
+                                                curYear = 0
+                                        else:
+                                            try:
+                                                curYear = int( dat_raw[idxRaw_year][iYR] )
+                                            except:
+                                                curYear = 0
+                                    else:
+                                        curYear = dat_raw[idxRaw_year][iYR]
+                                    
+                                    if curYear <= yearThresStart and curYear >= yearThresEnd:
+                                        # Define dat indicies
+                                        idxDat = yearThresStart - curYear
+                                        idxDat_country = 1 + iCode
+                                        idxDat_dataset = 2 + iDS
+    
+                                        # Get data point / observation
+                                        #   Some data sets report: "mean== [95% CI]"
+                                        #       ex: 91.1 [69.6-118.8]
+                                        haveData = True
+                                        if isinstance( dat_raw[iRow][iYR] ,str ):
+                                            try:
+                                                curData = dat_raw[iRow][iYR].split(' ', 1)[0]
+                                            except:
+                                                curData = dat_raw[iRow][iYR]
+    
+                                            try:
+                                                byteTest = curData[0].encode('utf-8')
+                                                if byteTest < b"0" or byteTest > b"9":
+                                                    haveData = False
+                                            except:
+                                                haveData = False
+    
+                                        else:
+                                            curData = dat_raw[iRow][iYR]
+    
+                                        if haveData:
+                                            # Set data
+                                            dat[idxDat][1][idxDat_country][idxDat_dataset] = curData
+
+                                break
+
+                        break
+                
+
+    return dat
+# End of getData_struct40
+###############################################################################
+###############################################################################
+###############################################################################
 
 
 
@@ -426,10 +518,25 @@ folderpath = "C:\\Users\\Paul\\Documents\\Coursework\\2016_3_HarExt_STATS_150_In
 #       13 = Insufficient Activity, age standardized estimate, male (Anna)
 #       14 = Gross National Income, per capita (Anna)
 #       15 = Alcohol Consumption, litres (Anna)
+#       16 = Improved Water Exposure, Rural (William)
+#       17 = Improved Water Exposure, Urban (William)
+#       18 = Improved Water Exposure, Total (William)
+#       19 = Life Expectancy at Birth, Both Sexes (William)
+#       20 = Life Expectancy at Birth, Female (William)
+#       21 = Life Expectancy at Birth, Male (William)
+#       22 = Life Expectancy at 60, Both Sexes (William)
+#       23 = Life Expectancy at 60, Female (William)
+#       24 = Life Expectancy at 60, Male (William)
+#       25 = GDP per capita (Ryan)
+#       26 = Household COnsumption (Ryan)
+#       27 = Women In Parliament
+#       28 = Urbanization
+#       29 = Happiness, Avg [Life Ladder]
+#       30 = Happiness, Freedom to Make Life Choices
+#       31 = Total Population
 
 
-
-nDataset = 15
+nDataset = 31
 labelIndicator = [None for x in range(nDataset)]
 codeIndicator = [None for x in range(nDataset)]
 filename = [None for x in range(nDataset)]
@@ -448,6 +555,7 @@ structData = [None for x in range(nDataset)]
 # 30 = organized by indicator, then country then year
 #
 # 40 = organized by country and year together (country is row, year is column)
+# 41 = organized by indicator, then country, then year is columns (plus parsing of years)
 
 iDS = 0
 #       Under Five Mortality
@@ -643,6 +751,202 @@ idxRaw_data[iDS] = 3 # Column where data starts
 structData[iDS] = 40
 
 
+iDS = iDS+1
+#       Improved Water Exposure, Rural
+labelIndicator[iDS] = "ImprovedWater_Rural"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_ImprovedWater_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 2 # Column where data starts
+
+structData[iDS] = 10
+
+
+iDS = iDS+1
+#       Improved Water Exposure, Urban
+labelIndicator[iDS] = "ImprovedWater_Urban"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_ImprovedWater_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 3 # Column where data starts
+
+structData[iDS] = 10
+
+
+iDS = iDS+1
+#       Improved Water Exposure, Total
+labelIndicator[iDS] = "ImprovedWater_Total"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_ImprovedWater_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 4 # Column where data starts
+
+structData[iDS] = 10
+
+
+iDS = iDS+1
+#       Life Expectancy at Birth, Both Sexes
+labelIndicator[iDS] = "LifeExpectancy_Birth_BothSexes"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_LifeExpectancy_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 2 # Column where data starts
+
+structData[iDS] = 10
+
+
+iDS = iDS+1
+#       Life Expectancy at Birth, Female
+labelIndicator[iDS] = "LifeExpectancy_Birth_Female"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_LifeExpectancy_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 3 # Column where data starts
+
+structData[iDS] = 10
+
+
+iDS = iDS+1
+#       Life Expectancy at Birth, Male
+labelIndicator[iDS] = "LifeExpectancy_Birth_Male"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_LifeExpectancy_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 4 # Column where data starts
+
+structData[iDS] = 10
+
+
+iDS = iDS+1
+#       Life Expectancy at 60, BothS exes
+labelIndicator[iDS] = "LifeExpectancy_Birth_BothSexes"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_LifeExpectancy_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 5 # Column where data starts
+
+structData[iDS] = 10
+
+
+iDS = iDS+1
+#       Life Expectancy at 60, Female
+labelIndicator[iDS] = "LifeExpectancy_Birth_Female"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_LifeExpectancy_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 6 # Column where data starts
+
+structData[iDS] = 10
+
+
+iDS = iDS+1
+#       Life Expectancy at 60, Male
+labelIndicator[iDS] = "LifeExpectancy_Birth_Male"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_LifeExpectancy_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 7 # Column where data starts
+
+structData[iDS] = 10
+
+
+iDS = iDS+1
+#       GDP per capita
+labelIndicator[iDS] = "GDP"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_GDP_Ryan.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 4 # Row Year
+idxRaw_data[iDS] = 4 # Column where data starts
+
+structData[iDS] = 40
+
+
+iDS = iDS+1
+#       Household Consumption Expenditure
+labelIndicator[iDS] = "HouseholdConsumption"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_HHC_Ryan.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 4 # Row Year
+idxRaw_data[iDS] = 4 # Column where data starts
+
+structData[iDS] = 40
+
+
+iDS = iDS+1
+#       % Women in Parliament
+labelIndicator[iDS] = "WomenInParliament"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_WomenInParliament.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 4 # Row Year
+idxRaw_data[iDS] = 4 # Column where data starts
+
+structData[iDS] = 40
+
+
+iDS = iDS+1
+#       % Urbanization
+labelIndicator[iDS] = "Urbanization_Percent"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_Urbanization.csv'
+idxRaw_country[iDS] = 2 # Column Country
+idxRaw_year[iDS] = 0 # Row Year
+idxRaw_data[iDS] = 4 # Column where data starts
+idxRaw_indicator[iDS] = 0 # Column indicator
+stringIndicator[iDS] = "Urban population (% of total)"
+
+structData[iDS] = 41
+
+
+iDS = iDS+1
+#       Happiness, Avg [Life Ladder]
+labelIndicator[iDS] = "Happiness_Avg"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_Happiness.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 2 # Column Year
+idxRaw_data[iDS] = 3 # Column where data starts
+
+structData[iDS] = 10
+
+
+iDS = iDS+1
+#       Happiness, Freedom to Make Life Choices
+labelIndicator[iDS] = "ChoiceFreedom"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_Happiness.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 2 # Column Year
+idxRaw_data[iDS] = 7 # Column where data starts
+
+structData[iDS] = 10
+
+
+iDS = iDS+1
+#       Total Population
+labelIndicator[iDS] = "Population"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_Population.csv'
+idxRaw_country[iDS] = 2 # Column Country
+idxRaw_year[iDS] = 0 # Row Year
+idxRaw_data[iDS] = 4 # Column where data starts
+idxRaw_indicator[iDS] = 0 # Column indicator
+stringIndicator[iDS] = "Population, total"
+
+structData[iDS] = 41
+
+
 
 
 
@@ -736,6 +1040,13 @@ for iDS in range(nDataset):
                                    idxRaw_country[iDS],
                                    idxRaw_year[iDS],
                                    idxRaw_data[iDS] )
+        elif structData[iDS] == 41:
+            dat = getData_struct41(dat, iDS, dat_raw,
+                                   idxRaw_country[iDS],
+                                   idxRaw_year[iDS],
+                                   idxRaw_data[iDS],
+                                   idxRaw_indicator[iDS],
+                                   stringIndicator[iDS] )
 
 
 
