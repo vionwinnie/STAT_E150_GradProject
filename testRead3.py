@@ -1,10 +1,17 @@
-
-# coding: utf-8
-
-# In[11]:
-
 import os.path
 import csv
+
+
+#   Where is the data held?
+# folderpath = "C:\\Users\Paul Jonak\\Documents\\STAT_E150__gradProject\\"
+folderpath = "C:\\Users\\Paul\\Documents\\Coursework\\2016_3_HarExt_STATS_150_IntermediateStats\\GradProject\\dataAnalysis\\"
+
+#   When gathering the most recent data, how many years back can we search?
+maxDiffYear = 5
+
+# What is the most recent year we would be interested in?
+yearThresStart = 2015
+
 
 
 ###############################################################################
@@ -12,8 +19,9 @@ import csv
 ###############################################################################
 def loadData_csv(filepath: str) -> list:
     # Verify that filepath points to a valid file
-    print(filepath)
-    print( os.path.isfile(filepath) )
+    print("Looking for: " + filepath)
+    print("Found? " + str(os.path.isfile(filepath)) )
+
     if os.path.isfile(filepath) is True:
         # Load data
         with open(filepath, 'r') as f:
@@ -28,6 +36,9 @@ def loadData_csv(filepath: str) -> list:
 ###############################################################################
 ###############################################################################
 def adjCountryName(nameCountry: str) -> str:
+
+    nameCountry = nameCountry.lstrip()
+
     if len(nameCountry) > 6 and nameCountry[0:6] == "United":
         if len(nameCountry) >= 12 and nameCountry[7:13] == "States":
             nameCountry = "USA"
@@ -43,6 +54,72 @@ def adjCountryName(nameCountry: str) -> str:
         nameCountry = nameCountry[0:nameCountry.index("(") - 1]
     return nameCountry
 # End of adjCountryName
+###############################################################################
+###############################################################################
+###############################################################################
+def getData_struct01(dat: list, iDS: int,
+                     dat_raw: list,
+                     idxRaw_country: int,
+                     idxRaw_year: int,
+                     idxRaw_data: int) -> list:
+    # Data is organized by country and year is given in idxRaw_year
+
+    # Go through each row and identify the country
+    # Adjust country name if appropriate
+    # Find matching year and country in main matrix, dat
+    #   Ignore first row - headers
+    curYear = idxRaw_year
+    if curYear <= yearThresStart and curYear >= yearThresEnd:
+        for iRow in range(1,len(dat_raw)):
+            nameCountry = dat_raw[iRow][idxRaw_country]
+
+            nameCountry = adjCountryName(nameCountry)
+
+            # Make sure country exists within WHO country list
+            for idxWHO in range(1, len(dat_WHO_country)):
+                if nameCountry == dat_WHO_country[idxWHO][idxWHO_country]:
+                    # Found match by name
+                    #   Find match in dat for code
+                    codeCountry = dat_WHO_country[idxWHO][idxWHO_code]
+                    for iCode in range(len(listCountryCode)):
+                        if codeCountry == listCountryCode[iCode]:
+                            # Found match by code
+
+                            # Define dat indicies
+                            idxDat = yearThresStart - curYear
+                            idxDat_country = 1 + iCode
+                            idxDat_dataset = 2 + iDS
+
+                            # Get data point / observation
+                            #   Some data sets report: "mean [95% CI]"
+                            #       ex: 91.1 [69.6-118.8]
+                            haveData = True
+                            if isinstance( dat_raw[iRow][idxRaw_data] ,str ):
+                                try:
+                                    curData = dat_raw[iRow][idxRaw_data].split(' ', 1)[0]
+                                except:
+                                    curData = dat_raw[iRow][idxRaw_data]
+
+                                try:
+                                    byteTest = curData[0].encode('utf-8')
+                                    if byteTest < b"0" or byteTest > b"9":
+                                        haveData = False
+                                except:
+                                    haveData = False
+
+                            else:
+                                curData = dat_raw[iRow][idxRaw_data]
+
+                            if haveData:
+                                # Set data
+                                dat[idxDat][1][idxDat_country][idxDat_dataset] = curData
+
+                            break
+
+                    break
+
+    return dat
+# End of getData_struct01
 ###############################################################################
 ###############################################################################
 ###############################################################################
@@ -487,7 +564,121 @@ def getData_struct41(dat: list, iDS: int,
                 
 
     return dat
-# End of getData_struct40
+# End of getData_struct41
+###############################################################################
+###############################################################################
+###############################################################################
+def getData_struct42(dat: list, iDS: int,
+                         dat_raw: list,
+                         idxRaw_country: int,
+                         idxRaw_year: int,
+                         idxRaw_data: int,
+                         idxRaw_indicator: int,
+                         stringIndicator: str) -> list:
+
+
+    # Data is organized by country, then indicator and year are columns
+
+    #
+    minColWidth = max( len(dat_raw[idxRaw_year]) , len(dat_raw[idxRaw_indicator]) )
+
+    # Go through columns first to find indicator
+    for iCol in range(idxRaw_data,minColWidth):
+        if stringIndicator == dat_raw[idxRaw_indicator][iCol]:
+            # Match found!
+            # Get year
+            haveYear = True
+            if isinstance(dat_raw[idxRaw_year][iCol], str):
+                strYear = dat_raw[idxRaw_year][iCol].lstrip()
+
+                if (' ' in strYear):
+
+                    if len(strYear) >= 7:
+                        if strYear[0:7] == "No data":
+                            haveYear = False
+
+                    if haveYear:
+                        try:
+                            curYear = int( strYear.split(' ', 1)[0] )
+                        except:
+                            haveYear = False
+                else:
+                    try:
+                        curYear = int( dat_raw[idxRaw_year][iCol] )
+                    except:
+                        haveYear = False
+            else:
+                try:
+                    curYear = int( dat_raw[idxRaw_year][iCol] )
+                except:
+                    haveYear = False
+
+            if haveYear:
+                # Is curYear within our range?
+                if curYear <= yearThresStart and curYear >= yearThresEnd:
+                    # Get country
+                    for iRow in range(1 + idxRaw_year, len(dat_raw)):
+                        nameCountry = dat_raw[iRow][idxRaw_country]
+
+                        nameCountry = adjCountryName(nameCountry)
+
+                        # Make sure country exists within WHO country list
+                        for idxWHO in range(1, len(dat_WHO_country)):
+                            if nameCountry == dat_WHO_country[idxWHO][idxWHO_country]:
+                                # Found match by name
+                                #   Find match in dat for code
+                                codeCountry = dat_WHO_country[idxWHO][idxWHO_code]
+                                for iCode in range(len(listCountryCode)):
+                                    if codeCountry == listCountryCode[iCode]:
+                                        # Found match by code
+                                        # Define dat indicies
+                                        idxDat = yearThresStart - curYear
+                                        idxDat_country = 1 + iCode
+                                        idxDat_dataset = 2 + iDS
+
+                                        # Get data point / observation
+                                        #   Some data sets report: "mean== [95% CI]"
+                                        #       ex: 91.1 [69.6-118.8]haveData = True
+                                        haveData = True
+                                        if isinstance(dat_raw[iRow][iCol], str):
+                                            strData = dat_raw[iRow][iCol].lstrip()
+
+                                            if (' ' in strData):
+                                                if len(strData) >= 7:
+                                                    if strData[0:7] == "No data":
+                                                        haveData = False
+
+                                                if haveData:
+                                                    try:
+                                                        strData = strData.split(' ', 1)[0]
+                                                    except:
+                                                        haveData = False
+
+                                            if haveData:
+                                                if len(strData) == 3 and strData == "Yes":
+                                                    curData = 1
+                                                elif len(strData) == 2 and strData == "No":
+                                                    curData = 0
+                                                else:
+                                                    try:
+                                                        curData = int( strData )
+                                                    except:
+                                                        haveData = False
+                                        else:
+                                            try:
+                                                curData = int( dat_raw[iRow][iCol] )
+                                            except:
+                                                haveData = False
+
+                                        if haveData:
+                                            # Set data
+                                            dat[idxDat][1][idxDat_country][idxDat_dataset] = curData
+
+                                        break
+                                break
+
+    return dat
+# End of getData_struct42
 ###############################################################################
 ###############################################################################
 ###############################################################################
@@ -497,9 +688,6 @@ def getData_struct41(dat: list, iDS: int,
 
 
 # Define all data
-#   Where is the data held?
-# folderpath = "C:\\Users\Paul Jonak\\Documents\\STAT_E150__gradProject\\"
-folderpath = "C:\\Users\\Paul\\Documents\\Coursework\\2016_3_HarExt_STATS_150_IntermediateStats\\GradProject\\dataAnalysis\\"
 
 
 #   Describe each data set
@@ -534,9 +722,16 @@ folderpath = "C:\\Users\\Paul\\Documents\\Coursework\\2016_3_HarExt_STATS_150_In
 #       29 = Happiness, Avg [Life Ladder]
 #       30 = Happiness, Freedom to Make Life Choices
 #       31 = Total Population
+#       32 = Have Program to reduce unhealthy diet (William)
+#       33 = Have Program to reduce physical inactivity (William)
+#       34 = Have Program to reduce harmful use of alcohol (William)
+#       35 = Have Program to reduce cardiovascular disease (William)
+#       36 = Have Program to reduce diabetes (William)
+#       37 = Have Program to reduce tobacco use (William)
+#       38 = McDonalds (Anna)
 
 
-nDataset = 31
+nDataset = 38
 labelIndicator = [None for x in range(nDataset)]
 codeIndicator = [None for x in range(nDataset)]
 filename = [None for x in range(nDataset)]
@@ -547,6 +742,8 @@ idxRaw_indicator = [None for x in range(nDataset)] # Column indicator
 stringIndicator = [None for x in range(nDataset)] # Use if indicators are interspersed
 
 structData = [None for x in range(nDataset)]
+# 01 = organized by country, given year
+#
 # 10 = organized by country, then year (no gender)
 # 11 = same as 10, but with gender
 #
@@ -947,6 +1144,101 @@ stringIndicator[iDS] = "Population, total"
 structData[iDS] = 41
 
 
+iDS = iDS+1
+#       Have program to reduce unhealthy diet
+labelIndicator[iDS] = "HaveProgram_BadDiet"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_EduPrograms_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 1 # Column where data starts
+idxRaw_indicator[iDS] = 0 # Row indicator
+stringIndicator[iDS] = "Existence of operational policy/strategy/action plan to reduce unhealthy diet related to NCDs"
+
+structData[iDS] = 42
+
+
+iDS = iDS+1
+#       Have program to reduce physical inactivity
+labelIndicator[iDS] = "HaveProgram_PhysicalInactivity"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_EduPrograms_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 1 # Column where data starts
+idxRaw_indicator[iDS] = 0 # Row indicator
+stringIndicator[iDS] = "Existence of operational policy/strategy/action plan to reduce physical inactivity"
+
+structData[iDS] = 42
+
+
+iDS = iDS+1
+#       Have program to reduce harmful use of alcohol
+labelIndicator[iDS] = "HaveProgram_Alochol"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_EduPrograms_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 1 # Column where data starts
+idxRaw_indicator[iDS] = 0 # Row indicator
+stringIndicator[iDS] = "Existence of operational policy/strategy/action plan to reduce the harmful use of alcohol"
+
+structData[iDS] = 42
+
+
+iDS = iDS+1
+#       Have program to reduce cardiovascular disease
+labelIndicator[iDS] = "HaveProgram_CVD"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_EduPrograms_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 1 # Column where data starts
+idxRaw_indicator[iDS] = 0 # Row indicator
+stringIndicator[iDS] = "Existence of operational policy/strategy/action plan for cardiovascular diseases"
+
+structData[iDS] = 42
+
+
+iDS = iDS+1
+#       Have program to reduce diabetes
+labelIndicator[iDS] = "HaveProgram_Diabetes"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_EduPrograms_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 1 # Column where data starts
+idxRaw_indicator[iDS] = 0 # Row indicator
+stringIndicator[iDS] = "Existence of operational policy/strategy/action plan for diabetes"
+
+structData[iDS] = 42
+
+
+iDS = iDS+1
+#       Have program to reduce tobacco use
+labelIndicator[iDS] = "HaveProgram_Tobacco"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_EduPrograms_William.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 1 # Row Year
+idxRaw_data[iDS] = 1 # Column where data starts
+idxRaw_indicator[iDS] = 0 # Row indicator
+stringIndicator[iDS] = "Existence of operational policy/strategy/action plan to decrease tobacco use"
+
+structData[iDS] = 42
+
+
+iDS = iDS+1
+#       McDonalds
+labelIndicator[iDS] = "McDonalds"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_McDonalds_Anna.csv'
+idxRaw_country[iDS] = 0 # Column Country
+idxRaw_year[iDS] = 2012 # Given Year
+idxRaw_data[iDS] = 2 # Column data
+
+structData[iDS] = 1
+
 
 
 
@@ -960,10 +1252,11 @@ idxWHO_code = 1
 
 # Initialize our final matrix
 #   Year data
-#       What is the earliest year we would be interested in?
-yearThresEnd = 2000
 #       What is the most recent year we would be interested in?
-yearThresStart = 2015
+# yearThresStart = 2015 # Defined above
+#       What is the earliest year we would be interested in?
+yearThresEnd = yearThresStart-int(2*maxDiffYear)
+
 
 #   Country list
 #       Only use countries that are within the WHO country code list
@@ -1047,12 +1340,242 @@ for iDS in range(nDataset):
                                    idxRaw_data[iDS],
                                    idxRaw_indicator[iDS],
                                    stringIndicator[iDS] )
+        elif structData[iDS] == 42:
+            dat = getData_struct42(dat, iDS, dat_raw,
+                                   idxRaw_country[iDS],
+                                   idxRaw_year[iDS],
+                                   idxRaw_data[iDS],
+                                   idxRaw_indicator[iDS],
+                                   stringIndicator[iDS])
+        elif structData[iDS] == 1:
+            dat = getData_struct01(dat, iDS, dat_raw,
+                                   idxRaw_country[iDS],
+                                   idxRaw_year[iDS],
+                                   idxRaw_data[iDS])
 
 
 
+# Find most recent year with BMI data
+# For each variable, get most recent data without being more recent than BMI data
+haveData = False
+strTarget = "BMI"
+rYear = 0
+rIdx = 0
+search_startIdx = 1
+search_endIdx = 20
+for iCol in range( len(dat[0][1][0] )):
+    if strTarget in dat[0][1][0][iCol]:
+        # Found match!
+        # Get most recent year of data
+        for iYr in range(len(dat)):
+            for idx in range(search_startIdx,search_endIdx):
+                if dat[iYr][1][idx][iCol] is not None:
+                    haveData = True
+                    rYear = dat[iYr][0]
+                    rIdx = iYr
+
+                    break
+
+            if haveData:
+                break
+
+        if haveData:
+            break
+
+if haveData:
+    # For each variable, get most recent data without being more recent than BMI data
+
+    # Initialize
+    #   How many rows?
+    nRow = len( dat[rIdx][1] )
+    #   How many columns?
+    nCol = len( dat[rIdx][1][0] )
+    #   Initialize
+    rDat = [None for x in range(nRow)]
+    for iRow in range(nRow):
+        rDat[iRow] = [None for x in range(nCol)]
+
+    #   Fill headers
+    iRow = 0
+    for iCol in range(nCol):
+        rDat[iRow][iCol] = dat[rIdx][1][0][iCol]
+
+    #   Fill countries
+    for iRow in range(1,nRow):
+        rDat[iRow][0] = dat[rIdx][1][iRow][0]
+
+    # Get data
+    for iRow in range(1,nRow):
+        for iCol in range(1,nCol):
+            # Get most recent data
+
+            for iYr in range(rIdx,min(rIdx+maxDiffYear,len(dat))):
+                if dat[iYr][1][iRow][iCol] is not None:
+                    rDat[iRow][iCol] = dat[iYr][1][iRow][iCol]
+
+                    break
+
+    ###############################################################################
+    ###############################################################################
+    ###############################################################################
+
+    # Get information to narrow down which variables/countries to use
+    import copy
+    rDat2 = copy.deepcopy(rDat)
+    nCol_ignore = 2
+    nRow_ignore = 1
+
+    #   Step 1
+    #       Remove variables and countries with less than 10% data
+    nRow = len(rDat2)
+    nCol = len(rDat2[0])
+
+    nRow_step1_start = nRow
+    nCol_step1_start = nCol
+
+    for iCol in range(nCol-nCol_ignore):
+        temp = 0
+        idx = nCol-1-iCol
+        for iRow in range(nRow_ignore,nRow):
+            if rDat2[iRow][idx] is not None:
+                temp = temp+1
+
+        temp = int(temp/(nRow-nRow_ignore)*100)
+        if temp < 10:
+            # Delete column
+            for iRow in range(nRow):
+                del rDat2[iRow][idx]
+
+    nCol = len(rDat2[0])
+
+    for iRow in range(nRow-nRow_ignore):
+        temp = 0
+        idx = nRow-1-iRow
+        for iCol in range(nCol_ignore,nCol):
+            if rDat2[idx][iCol] is not None:
+                temp = temp+1
+
+        temp = int(temp/(nCol-nCol_ignore)*100)
+        if temp < 10:
+            # Delete row
+            del rDat2[idx]
+
+    nRow = len(rDat2)
+
+    nRow_step1_end = nRow
+    nCol_step1_end = nCol
+
+
+    print("Step 1 - remove <10% data - removed " +
+          str(nRow_step1_start-nRow_step1_end) + " rows and " +
+          str(nCol_step1_start-nCol_step1_end) + " columns")
+    # print("nRow = " + str(nRow_step1_start) + " - nCol = " + str(nCol_step1_start))
+    # print("nRow = " + str(nRow_step1_end) + " - nCol = " + str(nCol_step1_end))
+
+    #   Step 2
+    #       Remove variables and countries with less than (mean-2*std) data
+    import statistics
+
+    nRow_step2_start = nRow
+    nCol_step2_start = nCol
+
+    #       Step 2 - countries
+    tempList = [None for x in range(nRow-nRow_ignore)]
+    for iRow in range(nRow - nRow_ignore):
+        idx = nRow - 1 - iRow
+        idxList = (nRow-nRow_ignore)-1-iRow
+
+        tempList[idxList] = 0
+        for iCol in range(nCol_ignore, nCol):
+            if rDat2[idx][iCol] is not None:
+                tempList[idxList] = tempList[idxList] + 1
+
+    #           Get threshold
+    thres_step2 = statistics.mean(tempList)-2*statistics.stdev(tempList)
+    #           Apply threshold
+    for iRow in range(nRow - nRow_ignore):
+        idx = nRow - 1 - iRow
+        idxList = (nRow - nRow_ignore) - 1 - iRow
+
+        if tempList[idxList] < thres_step2:
+            # Delete row
+            del rDat2[idx]
+
+    nRow = len(rDat2)
+
+    #       Step 2 - variables
+    tempList = [None for x in range(nCol - nCol_ignore)]
+    for iCol in range(nCol - nCol_ignore):
+        idx = nCol - 1 - iCol
+        idxList = (nCol-nCol_ignore)-1-iCol
+
+        tempList[idxList] = 0
+        for iRow in range(nRow_ignore, nRow):
+            if rDat2[iRow][idx] is not None:
+                tempList[idxList] = tempList[idxList] + 1
+
+    #           Get threshold
+    thres_step2 = statistics.mean(tempList) - 2 * statistics.stdev(tempList)
+    #           Apply threshold
+    for iCol in range(nCol - nCol_ignore):
+        idx = nCol - 1 - iCol
+        idxList = (nCol - nCol_ignore) - 1 - iCol
+
+        if tempList[idxList] < thres_step2:
+            # Delete column
+            for iRow in range(nRow):
+                del rDat2[iRow][idx]
+
+    nCol = len(rDat2[0])
+
+
+
+    nRow_step2_end = nRow
+    nCol_step2_end = nCol
+
+    print("Step 2 - remove <(mean-2*std)% data - removed " +
+          str(nRow_step2_start - nRow_step2_end) + " rows and " +
+          str(nCol_step2_start - nCol_step2_end) + " columns")
+    # print("nRow = " + str(nRow_step2_start) + " - nCol = " + str(nCol_step2_start))
+    # print("nRow = " + str(nRow_step2_end) + " - nCol = " + str(nCol_step2_end))
+
+
+
+    print("Trimmed results - " + str(nRow_step2_end-nRow_ignore) +
+          " countries and " + str(nCol_step2_end-nCol_ignore) + " variables")
+
+
+
+    # Get data where each country has values for every variable
+    rDat3 = copy.deepcopy(rDat2)
+    nRow = len(rDat3)
+    nCol = len(rDat3[0])
+
+    for iRow in range(nRow - nRow_ignore):
+        idx = nRow - 1 - iRow
+        for iCol in range(nCol_ignore, nCol):
+            if rDat3[idx][iCol] is None:
+                # Delete row
+                del rDat3[idx]
+                break
+
+    nRow = len(rDat3)
+
+    print("Number of countries with data for every variable = " + str(nRow-nRow_ignore))
+
+
+
+
+
+
+
+
+###############################################################################
+###############################################################################
+###############################################################################
 # Write to CSV file
 #   Open writer
-with open('testWrite3.csv','w') as csvfile:
+with open('testWrite3_allData.csv','w') as csvfile:
     hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
 
     # Go through each year and write the data in YrGrp
@@ -1066,13 +1589,26 @@ with open('testWrite3.csv','w') as csvfile:
             for iRow in range( len(dat[iYr][1]) ):
                 hWrite.writerow([cYear] + dat[iYr][1][iRow])
 
+with open('testWrite3_mostRecent.csv','w') as csvfile:
+    hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
 
-# In[ ]:
+    # Go through each year and write the data in YrGrp
+    for iRow in range( len(rDat) ):
+        #   Write data
+        hWrite.writerow(rDat[iRow])
 
+with open('testWrite3_mostRecent_trim.csv','w') as csvfile:
+    hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
 
+    # Go through each year and write the data in YrGrp
+    for iRow in range( len(rDat2) ):
+        #   Write data
+        hWrite.writerow(rDat2[iRow])
 
+with open('testWrite3_mostRecent_trimAllVar.csv','w') as csvfile:
+    hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
 
-# In[ ]:
-
-
-
+    # Go through each year and write the data in YrGrp
+    for iRow in range( len(rDat3) ):
+        #   Write data
+        hWrite.writerow(rDat3[iRow])
