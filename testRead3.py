@@ -7,10 +7,11 @@ import csv
 folderpath = "C:\\Users\\Paul\\Documents\\Coursework\\2016_3_HarExt_STATS_150_IntermediateStats\\GradProject\\dataAnalysis\\"
 
 #   When gathering the most recent data, how many years back can we search?
-maxDiffYear = 5
+maxDiffYear = 7
 
 # What is the most recent year we would be interested in?
 yearThresStart = 2015
+
 
 
 
@@ -351,7 +352,18 @@ def getData_struct30(dat: list, iDS: int,
             if stringIndicator == dat_raw[iRow][idxRaw_indicator]:
                 # Match found!
 
-                curYear = int( dat_raw[iRow][idxRaw_year] )
+                # Some datasets give year ranges
+                #   e.g. 2003-2005
+                #   Take most recent year
+                curYear = dat_raw[iRow][idxRaw_year]
+                if isinstance( curYear ,str):
+                    try:
+                        curYear = int( curYear.split('-', 1)[1] )
+                    except:
+                        curYear = int( curYear )
+                
+                # curYear = int( dat_raw[iRow][idxRaw_year] )
+                
                 if curYear <= yearThresStart and curYear >= yearThresEnd:
                     nameCountry = dat_raw[iRow][idxRaw_country]
 
@@ -682,6 +694,50 @@ def getData_struct42(dat: list, iDS: int,
 ###############################################################################
 ###############################################################################
 ###############################################################################
+def getData_continent(dat: list, iDS: int,
+                         dat_raw: list,
+                         stringIndicator: str ) -> list:
+    # Country name given in column 1
+    # Continent name given in column 2
+    for iRow in range(1,len(dat_raw)):
+        # Get country name
+        nameCountry = dat_raw[iRow][0]
+
+        nameCountry = adjCountryName(nameCountry)
+            
+        # Make sure country exists within WHO country list
+        for idxWHO in range(1, len(dat_WHO_country)):
+            if nameCountry == dat_WHO_country[idxWHO][idxWHO_country]:
+                # Found match by name
+                #   Find match in dat for code
+                codeCountry = dat_WHO_country[idxWHO][idxWHO_code]
+                for iCode in range(len(listCountryCode)):
+                    if codeCountry == listCountryCode[iCode]:
+                        # Found match by code
+                        # Define dat indicies
+                        idxDat_country = 1 + iCode
+                        idxDat_dataset = 2 + iDS
+                            
+                        # Don't have an index for year because this one
+                        # affects all years
+                            
+                        if dat_raw[iRow][1] == stringIndicator:
+                            # Continent match found
+                            curData = 1
+                        else:
+                            curData = 0
+                            
+                            
+                        for iYr in range(0,len(dat)):
+                            dat[iYr][1][idxDat_country][idxDat_dataset] = curData
+
+    return dat
+    
+    
+# End of getData_continent
+###############################################################################
+###############################################################################
+###############################################################################
 
 
 
@@ -729,9 +785,24 @@ def getData_struct42(dat: list, iDS: int,
 #       36 = Have Program to reduce diabetes (William)
 #       37 = Have Program to reduce tobacco use (William)
 #       38 = McDonalds (Anna)
+#       39 = Continents_Africa
+#       40 = Continents_Asia
+#       41 = Continents_Carribbean
+#       42 = Continents_Europe
+#       43 = Continents_MiddleEast
+#       44 = Continents_CentralAmerica
+#       45 = Continents_NorthAmerica
+#       46 = Continents_Oceania
+#       47 = Continents_SouthAmerica
+#       48 = FAO_Domestic Food Price Index
+#       49 = FAO_Domestic Food Price Volatility
+#       50 = FAO_Share Of Dietary Energy Supply From Cereals etc
+#       51 = FAO_Average Protein Supply
+#       52 = FAO_Political stability and absence of violence/terrorism
 
 
-nDataset = 38
+
+nDataset = 52
 labelIndicator = [None for x in range(nDataset)]
 codeIndicator = [None for x in range(nDataset)]
 filename = [None for x in range(nDataset)]
@@ -742,6 +813,8 @@ idxRaw_indicator = [None for x in range(nDataset)] # Column indicator
 stringIndicator = [None for x in range(nDataset)] # Use if indicators are interspersed
 
 structData = [None for x in range(nDataset)]
+# 00 = special case
+#
 # 01 = organized by country, given year
 #
 # 10 = organized by country, then year (no gender)
@@ -753,6 +826,7 @@ structData = [None for x in range(nDataset)]
 #
 # 40 = organized by country and year together (country is row, year is column)
 # 41 = organized by indicator, then country, then year is columns (plus parsing of years)
+
 
 iDS = 0
 #       Under Five Mortality
@@ -1240,6 +1314,142 @@ idxRaw_data[iDS] = 2 # Column data
 structData[iDS] = 1
 
 
+iDS = iDS+1
+#       Continents
+labelIndicator[iDS] = "Continent_Africa"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_continents.csv'
+stringIndicator[iDS] = "Africa"
+
+iDS = iDS+1
+#       Continents
+labelIndicator[iDS] = "Continent_Asia"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_continents.csv'
+stringIndicator[iDS] = "Asia"
+
+iDS = iDS+1
+#       Continents
+labelIndicator[iDS] = "Continent_Carribbean"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_continents.csv'
+stringIndicator[iDS] = "Carribbean Islands"
+
+iDS = iDS+1
+#       Continents
+labelIndicator[iDS] = "Continent_Europe"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_continents.csv'
+stringIndicator[iDS] = "Europe"
+
+iDS = iDS+1
+#       Continents
+labelIndicator[iDS] = "Continent_MiddleEast"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_continents.csv'
+stringIndicator[iDS] = "Middle East"
+
+iDS = iDS+1
+#       Continents
+labelIndicator[iDS] = "Continent_CentralAmerica"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_continents.csv'
+stringIndicator[iDS] = "Central America"
+
+iDS = iDS+1
+#       Continents
+labelIndicator[iDS] = "Continent_NorthAmerica"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_continents.csv'
+stringIndicator[iDS] = "North America"
+
+iDS = iDS+1
+#       Continents
+labelIndicator[iDS] = "Continent_Oceania"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_continents.csv'
+stringIndicator[iDS] = "Oceania"
+
+iDS = iDS+1
+#       Continents
+labelIndicator[iDS] = "Continent_SouthAmerica"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_continents.csv'
+stringIndicator[iDS] = "South America"
+
+
+iDS = iDS+1
+#       FAO_Domestic Food Price Index
+labelIndicator[iDS] = "FoodPrice_Index"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_FAO.csv'
+idxRaw_country[iDS] = 3 # Column Country
+idxRaw_year[iDS] = 8 # Column Year
+idxRaw_data[iDS] = 9 # Data of interest
+idxRaw_indicator[iDS] = 7 # Column indicator
+stringIndicator[iDS] = "Domestic food price index (index)"
+
+structData[iDS] = 30
+
+
+iDS = iDS+1
+#       FAO_Domestic Food Price Volatility
+labelIndicator[iDS] = "FoodPrice_Volatility_Index"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_FAO.csv'
+idxRaw_country[iDS] = 3 # Column Country
+idxRaw_year[iDS] = 8 # Column Year
+idxRaw_data[iDS] = 9 # Data of interest
+idxRaw_indicator[iDS] = 7 # Column indicator
+stringIndicator[iDS] = "Domestic food price volatility (index)"
+
+structData[iDS] = 30
+
+
+iDS = iDS+1
+#       FAO_Share Of Dietary Energy Supply From Cereals etc
+labelIndicator[iDS] = "DietaryEnergy_FromCerealsRootsTubers"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_FAO.csv'
+idxRaw_country[iDS] = 3 # Column Country
+idxRaw_year[iDS] = 8 # Column Year
+idxRaw_data[iDS] = 9 # Data of interest
+idxRaw_indicator[iDS] = 7 # Column indicator
+stringIndicator[iDS] = "Share of dietary energy supply derived from cereals, roots and tubers (%) (3-year average)"
+
+structData[iDS] = 30
+
+
+iDS = iDS+1
+#       FAO_Share Of Dietary Energy Supply From Cereals etc
+labelIndicator[iDS] = "ProteinSupply_Avg_Daily_PerCapita"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_FAO.csv'
+idxRaw_country[iDS] = 3 # Column Country
+idxRaw_year[iDS] = 8 # Column Year
+idxRaw_data[iDS] = 9 # Data of interest
+idxRaw_indicator[iDS] = 7 # Column indicator
+stringIndicator[iDS] = "Average protein supply (g/capita/day) (3-year average)"
+
+structData[iDS] = 30
+
+
+iDS = iDS+1
+#       FAO_Share Of Dietary Energy Supply From Cereals etc
+labelIndicator[iDS] = "PoliticalStability_And_LackOfViolence_Index"
+codeIndicator[iDS] = 0
+filename[iDS] = 'data_FAO.csv'
+idxRaw_country[iDS] = 3 # Column Country
+idxRaw_year[iDS] = 8 # Column Year
+idxRaw_data[iDS] = 9 # Data of interest
+idxRaw_indicator[iDS] = 7 # Column indicator
+stringIndicator[iDS] = "Political stability and absence of violence/terrorism (index)"
+
+structData[iDS] = 30
+
+
+
+
 
 
 
@@ -1352,11 +1562,46 @@ for iDS in range(nDataset):
                                    idxRaw_country[iDS],
                                    idxRaw_year[iDS],
                                    idxRaw_data[iDS])
+            
+        else:
+            # Special cases
+            #   Continents
+            if len(labelIndicator[iDS]) > 8 and labelIndicator[iDS][0:9] == "Continent":
+                dat = getData_continent(dat, iDS, dat_raw, stringIndicator[iDS])
 
 
 
-# Find most recent year with BMI data
-# For each variable, get most recent data without being more recent than BMI data
+# Save data
+with open('testWrite3_allData.csv','w') as csvfile:
+    hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
+
+    # Go through each year and write the data in YrGrp
+    for iYr in range( len(dat) ):
+        # Do we have any data for this year?
+        if dat[iYr][1] != None:
+            # Have data
+
+            #   Write data
+            cYear = dat[iYr][0]
+            for iRow in range( len(dat[iYr][1]) ):
+                hWrite.writerow([cYear] + dat[iYr][1][iRow])
+
+
+
+
+
+###############################################################################
+###############################################################################
+###############################################################################
+# We have gathered all of our data. Now we can organize and trim it
+#   Operation 1: Get most recent data
+#       1) Find the BMI indicator
+#       2) Find the year with the most recent BMI data
+#           The range of years within which we will accept data is given by:
+#               End year = (Most recent year with BMI data)
+#               Start year = (Most recent year with BMI data) -  (maxDiffYear)
+#       3) Get most recent data within accepted range for each
+#           country-indicator pairing
 haveData = False
 strTarget = "BMI"
 rYear = 0
@@ -1415,20 +1660,250 @@ if haveData:
 
                     break
 
-    ###############################################################################
-    ###############################################################################
-    ###############################################################################
 
-    # Get information to narrow down which variables/countries to use
+                
+#    # Save data
+#    with open('testWrite3_mostRecent.csv','w') as csvfile:
+#        hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
+#
+#        # Go through each year and write the data in YrGrp
+#        for iRow in range( len(rDat) ):
+#            #   Write data
+#            hWrite.writerow(rDat[iRow])
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    # Operation 2) Remove countries with no BMI data
+    #   1) Copy data
+    #   2) Find column with BMI data
+    #   3)
+    #       3.a) Go through each country and check for BMI data
+    #       3.b) Delete countries with no BMI data
+    
+    iRow_label = 0
+    iCol_country = 0
+    
+    iRow_start = 1
+    iCol_start = 2
+    
+    iCol_BMI = [None]
+    
+    
+    
     import copy
     rDat2 = copy.deepcopy(rDat)
+    
+    
+    for iCol in range(iCol_start,len(rDat2[iRow_label])):
+        # Does this indicator have "BMI"?
+        if 'BMI' in rDat2[iRow_label][iCol]:
+            if iCol_BMI[0] is None:
+                iCol_BMI[0] = iCol
+            else:
+                iCol_BMI.append(iCol)
+        
+    # Ready to remove countries missing BMI data
+    for iRow in range(len(rDat2)-1,iCol_start-1,-1):
+        haveData = False
+        
+        for idxCol in range(0,len(iCol_BMI)):
+            iCol = iCol_BMI[idxCol]
+            
+            if rDat2[iRow][iCol] is not None:
+                haveData = True
+                break
+        
+        if not haveData:
+            print("No BMI data - Removing " + rDat2[iRow][iCol_country])
+            del rDat2[iRow]
+    
+
+
+
+#    # Save data
+#    with open('testWrite3_mostRecent.csv','w') as csvfile:
+#        hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
+#
+#        # Go through each year and write the data in YrGrp
+#        for iRow in range( len(rDat2) ):
+#            #   Write data
+#            hWrite.writerow(rDat2[iRow])
+    
+    
+    
+    
+    
+            
+    
+    
+    
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    # Operation 3) Re-Organize such that BMI variables come first
+    
+    # What are the new column indices for the BMI variables?
+    iCol_BMI_new = copy.deepcopy(iCol_BMI)
+    for idxCol in range(0,len(iCol_BMI)):
+        iCol_BMI_new[idxCol] = iCol_BMI_new[idxCol] - (iCol_BMI[0]-iCol_start)
+    
+        
+    # What are the new column indices for every column?
+    #   Only need to find new indices for columns that are to be changed
+    colList = list(None for X in range(0,len(rDat2[0])) );
+    for iCol in range(0,len(rDat2[0])):
+        
+        if iCol >= min(iCol_BMI_new) and iCol <= max(iCol_BMI):
+            I_BMI = False
+            for iBMI in range(0,len(iCol_BMI)):
+                if iCol == iCol_BMI_new[iBMI]:
+                    I_BMI = True
+                    colList[iCol] = iCol_BMI[iBMI]
+                    break
+            
+            if not I_BMI:
+                colList[iCol] = iCol - len(iCol_BMI)
+    
+    
+    # Make changes
+    rDat3 = copy.deepcopy(rDat2)
+    for iCol in range(0,len(rDat3[0])):
+        if colList[iCol] is not None:
+            for iRow in range(0,len(rDat3)):
+                rDat3[iRow][iCol] = rDat2[iRow][ colList[iCol] ]
+
+    
+    
+    
+    # Save data
+    with open('testWrite3_mostRecent.csv','w') as csvfile:
+        hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
+
+        # Go through each year and write the data in YrGrp
+        for iRow in range( len(rDat3) ):
+            #   Write data
+            hWrite.writerow(rDat3[iRow])
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    # Operation 4) Transform variables
+    #   McDonalds -> log
+    #       Get dataset index
+    iDS = 38
+    labelIndicator_new = "log(McDonalds)"
+    
+    #       Find which column is associated with this data
+    iCol = 1+iDS
+    if iCol in colList:
+        for i in range(0,len(colList)):
+            if colList[i] is not None:
+                if colList[i] == iCol:
+                    iCol = i
+                    break
+    
+    print("Transforming " + rDat3[0][iCol])
+    
+    #       Apply transformation
+    rDat3[0].append(labelIndicator_new)
+    for iRow in range(1,len(rDat3)):
+        if rDat3[iRow][iCol] is None:
+            rDat3[iRow].append(None)
+        else:
+            curData = float( rDat3[iRow][iCol] )
+            
+            if curData <= 0:
+                rDat3[iRow].append(newData)
+            else:
+                newData = math.log(curData)
+                rDat3[iRow].append(newData)
+    
+    
+    
+    
+    
+    #   Soft Drinks -> Log
+    #       Get dataset index
+    iDS = 10
+    labelIndicator_new = "log(SoftDrinks)"
+    
+    #       Find which column is associated with this data
+    iCol = 1+iDS
+    if iCol in colList:
+        for i in range(0,len(colList)):
+            if colList[i] is not None:
+                if colList[i] == iCol:
+                    iCol = i
+                    break
+    
+    print("Transforming " + rDat3[0][iCol])
+    
+    #       Apply transformation
+    rDat3[0].append(labelIndicator_new)
+    for iRow in range(1,len(rDat3)):
+        if rDat3[iRow][iCol] is None:
+            rDat3[iRow].append(None)
+        else:
+            curData = float( rDat3[iRow][iCol] )
+            
+            if curData <= 0:
+                rDat3[iRow].append(newData)
+            else:
+                newData = math.log(curData)
+                rDat3[iRow].append(newData)
+            
+            
+    
+    
+    
+    
+    
+    # Save data
+    with open('testWrite3_mostRecent.csv','w') as csvfile:
+        hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
+
+        # Go through each year and write the data in YrGrp
+        for iRow in range( len(rDat3) ):
+            #   Write data
+            hWrite.writerow(rDat3[iRow])
+    
+    
+    
+    
+    
+    
+    
+    
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    # Operation 5) Remove variables with too little data
     nCol_ignore = 2
     nRow_ignore = 1
 
     #   Step 1
     #       Remove variables and countries with less than 10% data
-    nRow = len(rDat2)
-    nCol = len(rDat2[0])
+    nRow = len(rDat3)
+    nCol = len(rDat3[0])
 
     nRow_step1_start = nRow
     nCol_step1_start = nCol
@@ -1437,30 +1912,30 @@ if haveData:
         temp = 0
         idx = nCol-1-iCol
         for iRow in range(nRow_ignore,nRow):
-            if rDat2[iRow][idx] is not None:
+            if rDat3[iRow][idx] is not None:
                 temp = temp+1
 
         temp = int(temp/(nRow-nRow_ignore)*100)
         if temp < 10:
             # Delete column
             for iRow in range(nRow):
-                del rDat2[iRow][idx]
+                del rDat3[iRow][idx]
 
-    nCol = len(rDat2[0])
+    nCol = len(rDat3[0])
 
     for iRow in range(nRow-nRow_ignore):
         temp = 0
         idx = nRow-1-iRow
         for iCol in range(nCol_ignore,nCol):
-            if rDat2[idx][iCol] is not None:
+            if rDat3[idx][iCol] is not None:
                 temp = temp+1
 
         temp = int(temp/(nCol-nCol_ignore)*100)
         if temp < 10:
             # Delete row
-            del rDat2[idx]
+            del rDat3[idx]
 
-    nRow = len(rDat2)
+    nRow = len(rDat3)
 
     nRow_step1_end = nRow
     nCol_step1_end = nCol
@@ -1472,143 +1947,130 @@ if haveData:
     # print("nRow = " + str(nRow_step1_start) + " - nCol = " + str(nCol_step1_start))
     # print("nRow = " + str(nRow_step1_end) + " - nCol = " + str(nCol_step1_end))
 
-    #   Step 2
-    #       Remove variables and countries with less than (mean-2*std) data
-    import statistics
-
-    nRow_step2_start = nRow
-    nCol_step2_start = nCol
-
-    #       Step 2 - countries
-    tempList = [None for x in range(nRow-nRow_ignore)]
-    for iRow in range(nRow - nRow_ignore):
-        idx = nRow - 1 - iRow
-        idxList = (nRow-nRow_ignore)-1-iRow
-
-        tempList[idxList] = 0
-        for iCol in range(nCol_ignore, nCol):
-            if rDat2[idx][iCol] is not None:
-                tempList[idxList] = tempList[idxList] + 1
-
-    #           Get threshold
-    thres_step2 = statistics.mean(tempList)-2*statistics.stdev(tempList)
-    #           Apply threshold
-    for iRow in range(nRow - nRow_ignore):
-        idx = nRow - 1 - iRow
-        idxList = (nRow - nRow_ignore) - 1 - iRow
-
-        if tempList[idxList] < thres_step2:
-            # Delete row
-            del rDat2[idx]
-
-    nRow = len(rDat2)
-
-    #       Step 2 - variables
-    tempList = [None for x in range(nCol - nCol_ignore)]
-    for iCol in range(nCol - nCol_ignore):
-        idx = nCol - 1 - iCol
-        idxList = (nCol-nCol_ignore)-1-iCol
-
-        tempList[idxList] = 0
-        for iRow in range(nRow_ignore, nRow):
-            if rDat2[iRow][idx] is not None:
-                tempList[idxList] = tempList[idxList] + 1
-
-    #           Get threshold
-    thres_step2 = statistics.mean(tempList) - 2 * statistics.stdev(tempList)
-    #           Apply threshold
-    for iCol in range(nCol - nCol_ignore):
-        idx = nCol - 1 - iCol
-        idxList = (nCol - nCol_ignore) - 1 - iCol
-
-        if tempList[idxList] < thres_step2:
-            # Delete column
-            for iRow in range(nRow):
-                del rDat2[iRow][idx]
-
-    nCol = len(rDat2[0])
-
-
-
-    nRow_step2_end = nRow
-    nCol_step2_end = nCol
-
-    print("Step 2 - remove <(mean-2*std)% data - removed " +
-          str(nRow_step2_start - nRow_step2_end) + " rows and " +
-          str(nCol_step2_start - nCol_step2_end) + " columns")
-    # print("nRow = " + str(nRow_step2_start) + " - nCol = " + str(nCol_step2_start))
-    # print("nRow = " + str(nRow_step2_end) + " - nCol = " + str(nCol_step2_end))
-
-
-
-    print("Trimmed results - " + str(nRow_step2_end-nRow_ignore) +
-          " countries and " + str(nCol_step2_end-nCol_ignore) + " variables")
-
-
-
-    # Get data where each country has values for every variable
-    rDat3 = copy.deepcopy(rDat2)
-    nRow = len(rDat3)
-    nCol = len(rDat3[0])
-
-    for iRow in range(nRow - nRow_ignore):
-        idx = nRow - 1 - iRow
-        for iCol in range(nCol_ignore, nCol):
-            if rDat3[idx][iCol] is None:
-                # Delete row
-                del rDat3[idx]
-                break
-
-    nRow = len(rDat3)
-
-    print("Number of countries with data for every variable = " + str(nRow-nRow_ignore))
-
-
-
-
-
-
-
-
-###############################################################################
-###############################################################################
-###############################################################################
-# Write to CSV file
-#   Open writer
-with open('testWrite3_allData.csv','w') as csvfile:
-    hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
-
-    # Go through each year and write the data in YrGrp
-    for iYr in range( len(dat) ):
-        # Do we have any data for this year?
-        if dat[iYr][1] != None:
-            # Have data
-
+    
+    
+    
+    
+    # Save data
+    with open('testWrite3_mostRecent_trim.csv','w') as csvfile:
+        hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
+    
+        # Go through each year and write the data in YrGrp
+        for iRow in range( len(rDat3) ):
             #   Write data
-            cYear = dat[iYr][0]
-            for iRow in range( len(dat[iYr][1]) ):
-                hWrite.writerow([cYear] + dat[iYr][1][iRow])
-
-with open('testWrite3_mostRecent.csv','w') as csvfile:
-    hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
-
-    # Go through each year and write the data in YrGrp
-    for iRow in range( len(rDat) ):
-        #   Write data
-        hWrite.writerow(rDat[iRow])
-
-with open('testWrite3_mostRecent_trim.csv','w') as csvfile:
-    hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
-
-    # Go through each year and write the data in YrGrp
-    for iRow in range( len(rDat2) ):
-        #   Write data
-        hWrite.writerow(rDat2[iRow])
-
-with open('testWrite3_mostRecent_trimAllVar.csv','w') as csvfile:
-    hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
-
-    # Go through each year and write the data in YrGrp
-    for iRow in range( len(rDat3) ):
-        #   Write data
-        hWrite.writerow(rDat3[iRow])
+            hWrite.writerow(rDat3[iRow])
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+#    #   Step 2
+#    #       Remove variables and countries with less than (mean-2.5*std) data
+#    thres = 1.5
+#    import statistics
+#
+#    nRow_step2_start = nRow
+#    nCol_step2_start = nCol
+#
+#    #       Step 2 - countries
+#    tempList = [None for x in range(nRow-nRow_ignore)]
+#    for iRow in range(nRow - nRow_ignore):
+#        idx = nRow - 1 - iRow
+#        idxList = (nRow-nRow_ignore)-1-iRow
+#
+#        tempList[idxList] = 0
+#        for iCol in range(nCol_ignore, nCol):
+#            if rDat3[idx][iCol] is not None:
+#                tempList[idxList] = tempList[idxList] + 1
+#
+#    #           Get threshold
+#    thres_step2 = statistics.mean(tempList)-thres*statistics.stdev(tempList)
+#    #           Apply threshold
+#    for iRow in range(nRow - nRow_ignore):
+#        idx = nRow - 1 - iRow
+#        idxList = (nRow - nRow_ignore) - 1 - iRow
+#
+#        if tempList[idxList] < thres_step2:
+#            # Delete row
+#            del rDat3[idx]
+#
+#    nRow = len(rDat3)
+#
+#    #       Step 2 - variables
+#    tempList = [None for x in range(nCol - nCol_ignore)]
+#    for iCol in range(nCol - nCol_ignore):
+#        idx = nCol - 1 - iCol
+#        idxList = (nCol-nCol_ignore)-1-iCol
+#
+#        tempList[idxList] = 0
+#        for iRow in range(nRow_ignore, nRow):
+#            if rDat3[iRow][idx] is not None:
+#                tempList[idxList] = tempList[idxList] + 1
+#
+#    #           Get threshold
+#    thres_step2 = statistics.mean(tempList) - thres*statistics.stdev(tempList)
+#    #           Apply threshold
+#    for iCol in range(nCol - nCol_ignore):
+#        idx = nCol - 1 - iCol
+#        idxList = (nCol - nCol_ignore) - 1 - iCol
+#
+#        if tempList[idxList] < thres_step2:
+#            # Delete column
+#            for iRow in range(nRow):
+#                del rDat3[iRow][idx]
+#
+#    nCol = len(rDat3[0])
+#
+#
+#
+#    nRow_step2_end = nRow
+#    nCol_step2_end = nCol
+#
+#    print("Step 2 - remove <(mean-" + str(thres) + "*std)% data - removed " +
+#          str(nRow_step2_start - nRow_step2_end) + " rows and " +
+#          str(nCol_step2_start - nCol_step2_end) + " columns")
+#    # print("nRow = " + str(nRow_step2_start) + " - nCol = " + str(nCol_step2_start))
+#    # print("nRow = " + str(nRow_step2_end) + " - nCol = " + str(nCol_step2_end))
+#
+#
+#
+#    print("Trimmed results - " + str(nRow_step2_end-nRow_ignore) +
+#          " countries and " + str(nCol_step2_end-nCol_ignore) + " variables")
+#
+#
+#
+#    # Get data where each country has values for every variable
+#    rDat4 = copy.deepcopy(rDat3)
+#    nRow = len(rDat4)
+#    nCol = len(rDat4[0])
+#
+#    for iRow in range(nRow - nRow_ignore):
+#        idx = nRow - 1 - iRow
+#        for iCol in range(nCol_ignore, nCol):
+#            if rDat4[idx][iCol] is None:
+#                # Delete row
+#                del rDat4[idx]
+#                break
+#
+#    nRow = len(rDat4)
+#
+#    print("Number of countries with data for every variable = " + str(nRow-nRow_ignore))
+#
+#    
+#    
+#    
+#    
+#    # Save data
+#    
+#    with open('testWrite3_mostRecent_trimAllVar.csv','w') as csvfile:
+#        hWrite = csv.writer(csvfile,delimiter=',',lineterminator='\n')
+#    
+#        # Go through each year and write the data in YrGrp
+#        for iRow in range( len(rDat4) ):
+#            #   Write data
+#            hWrite.writerow(rDat4[iRow])
