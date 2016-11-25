@@ -1,0 +1,23 @@
+library(MASS)
+
+summary(ols <- lm(MeanBMI_BothSexes ~ Physician.Density , data = df))
+
+models <- lapply(paste("MeanBMI_BothSexes", names(df)[-3], sep = "~"), formula)
+res.models <- lapply(models, FUN = function(x) {lm(formula = x, data = df)})
+names(res.models) <- paste("MeanBMI_BothSexes", names(df)[-3], sep = "~")
+
+result_names <- names(res.models)
+
+df_diagnostics <- data.frame(Name=character(),
+                 Rsq=numeric() 
+                 ) 
+
+for (i in 3:52){
+  name <- names(res.models)[[i]]
+  rsq <- res.models[[i]]$r.squared
+  row <- c(name,rsq)
+  df_diagnostics <- rbind(df_diagnostics,row)
+}
+
+#how do you make it into lattice?
+plot(res.models[[3]],1,2,3,4)
