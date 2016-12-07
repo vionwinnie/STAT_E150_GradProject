@@ -1,0 +1,517 @@
+Country Name,MeanBMI_BothSexes,Continent,Sex
+Afghanistan,21.6,Middle East,Mixed
+Albania,26.1,Europe,Mixed
+Algeria,26.2,Middle East,Mixed
+Angola,24.1,Africa,Mixed
+Antigua and Barbuda,28.4,Carribbean,Mixed
+Argentina,27.7,South America,Mixed
+Armenia,26.7,Asia,Mixed
+Australia,27.2,Oceania,Mixed
+Austria,25.4,Europe,Mixed
+Azerbaijan,27.4,Asia,Mixed
+Bahrain,28.2,Middle East,Mixed
+Bangladesh,21,Asia,Mixed
+Barbados,28.7,Carribbean,Mixed
+Belarus,26.6,Europe,Mixed
+Belgium,25.5,Europe,Mixed
+Belize,28.9,Central America,Mixed
+Benin,23.4,Africa,Mixed
+Bhutan,23.8,Asia,Mixed
+Bolivia,25.9,South America,Mixed
+Bosnia and Herzegovina,26.1,Europe,Mixed
+Botswana,24.7,Africa,Mixed
+Brazil,25.9,South America,Mixed
+Bulgaria,26,Europe,Mixed
+Burkina Faso,22.1,Africa,Mixed
+Burundi,20.9,Africa,Mixed
+Cambodia,21.9,Asia,Mixed
+Cameroon,24.4,Africa,Mixed
+Canada,27.2,North America,Mixed
+Central African Republic,22.4,Africa,Mixed
+Chad,22.3,Africa,Mixed
+Chile,27.8,South America,Mixed
+China,23.9,Asia,Mixed
+Colombia,25.9,South America,Mixed
+Comoros,24.1,Africa,Mixed
+Congo,23.3,Africa,Mixed
+Congo-Brazzaville,25.2,Asia,Mixed
+Costa Rica,26.9,Central America,Mixed
+Croatia,25.5,Europe,Mixed
+Cuba,26.2,Carribbean,Mixed
+Cyprus,27,Middle East,Mixed
+Czech Republic,26.9,Europe,Mixed
+Denmark,25.3,Europe,Mixed
+Djibouti,23.3,Africa,Mixed
+Dominica,27,Carribbean,Mixed
+Dominican Republic,26.7,Carribbean,Mixed
+Ecuador,27,South America,Mixed
+Egypt,29.2,Middle East,Mixed
+El Salvador,27.4,Central America,Mixed
+Equatorial Guinea,25.6,Africa,Mixed
+Eritrea,20.5,Africa,Mixed
+Estonia,25.5,Europe,Mixed
+Ethiopia,20.6,Africa,Mixed
+Fiji,27.2,Oceania,Mixed
+Finland,25.9,Europe,Mixed
+France,25.3,Europe,Mixed
+Gabon,25.5,Africa,Mixed
+Gambia,24,Africa,Mixed
+Georgia,27.2,Europe,Mixed
+Germany,26.3,Europe,Mixed
+Ghana,24.2,Africa,Mixed
+Greece,27.3,Europe,Mixed
+Grenada,27,Carribbean,Mixed
+Guatemala,26.5,Central America,Mixed
+Guinea,22.7,Africa,Mixed
+Guinea-Bissau,23.1,Africa,Mixed
+Guyana,26.3,South America,Mixed
+Haiti,24.1,Carribbean,Mixed
+Honduras,26.4,Central America,Mixed
+Hungary,26.3,Europe,Mixed
+Iceland,25.9,Europe,Mixed
+India,21.9,Asia,Mixed
+Indonesia,22.9,Asia,Mixed
+Iran,26.2,Middle East,Mixed
+Iraq,28,Middle East,Mixed
+Ireland,27.5,Europe,Mixed
+Israel,26.3,Middle East,Mixed
+Italy,26,Europe,Mixed
+Jamaica,27.4,Carribbean,Mixed
+Japan,22.6,Asia,Mixed
+Jordan,28.9,Middle East,Mixed
+Kazakhstan,27.4,Asia,Mixed
+Kenya,23,Africa,Mixed
+Kiribati,29.6,Oceania,Mixed
+Kuwait,30,Middle East,Mixed
+Kyrgyzstan,26.2,Asia,Mixed
+Latvia,25.8,Europe,Mixed
+Lebanon,27.8,Middle East,Mixed
+Lesotho,24.9,Africa,Mixed
+Liberia,24,Africa,Mixed
+Libya,28.4,Middle East,Mixed
+Lithuania,26.6,Europe,Mixed
+Luxembourg,26.5,Europe,Mixed
+Madagascar,21.1,Africa,Mixed
+Malawi,22.8,Africa,Mixed
+Malaysia,25.3,Asia,Mixed
+Maldives,25.1,Asia,Mixed
+Mali,22.8,Africa,Mixed
+Malta,27.2,Europe,Mixed
+Mauritania,24.8,Africa,Mixed
+Mauritius,25.6,Africa,Mixed
+Mexico,28.1,Central America,Mixed
+Mongolia,26,Asia,Mixed
+Montenegro,26,Europe,Mixed
+Morocco,25.6,Middle East,Mixed
+Mozambique,22.3,Africa,Mixed
+Myanmar,22.6,Asia,Mixed
+Namibia,24.3,Africa,Mixed
+Nepal,22.2,Asia,Mixed
+Netherlands,25.4,Europe,Mixed
+New Zealand,27.9,Oceania,Mixed
+Nicaragua,26.9,Central America,Mixed
+Niger,21.7,Africa,Mixed
+Nigeria,23.4,Africa,Mixed
+Norway,26,Europe,Mixed
+Oman,26.9,Middle East,Mixed
+Pakistan,23.8,Middle East,Mixed
+Panama,27.1,Central America,Mixed
+Papua New Guinea,25.3,Oceania,Mixed
+Paraguay,25.8,South America,Mixed
+Peru,26.3,South America,Mixed
+Philippines,23.2,Asia,Mixed
+Poland,26.4,Europe,Mixed
+Portugal,26.2,Europe,Mixed
+Qatar,29.2,Middle East,Mixed
+Romania,25.3,Europe,Mixed
+Russia,26.5,Europe,Mixed
+Rwanda,22,Africa,Mixed
+Saint Kitts and Nevis,29.7,Carribbean,Mixed
+Saint Lucia,29.6,Carribbean,Mixed
+Saint Vincent and the Grenadines,27.3,Carribbean,Mixed
+Samoa,31.7,Oceania,Mixed
+Sao Tome and Principe,24.8,Carribbean,Mixed
+Saudi Arabia,28.5,Middle East,Mixed
+Senegal,23,Africa,Mixed
+Serbia,25.8,Europe,Mixed
+Seychelles,26.8,Oceania,Mixed
+Sierra Leone,22.8,Africa,Mixed
+Singapore,23.7,Asia,Mixed
+Slovak Republic,26.5,Europe,Mixed
+Slovenia,26.9,Europe,Mixed
+Solomon Islands,25.5,Oceania,Mixed
+Somalia,21.9,Africa,Mixed
+South Africa,27.3,Africa,Mixed
+Spain,26.7,Europe,Mixed
+Sri Lanka,23,Asia,Mixed
+Sudan,25.2,Africa,Mixed
+Suriname,27.4,South America,Mixed
+Swaziland,26.5,Africa,Mixed
+Sweden,25.8,Europe,Mixed
+Switzerland,25.3,Europe,Mixed
+Syria,28.1,Middle East,Mixed
+Tajikistan,25.4,Middle East,Mixed
+Thailand,24.1,Asia,Mixed
+Timor-Leste,21.2,Asia,Mixed
+Togo,23.2,Africa,Mixed
+Tonga,31.9,Oceania,Mixed
+Trinidad and Tobago,28.7,Carribbean,Mixed
+Tunisia,26.8,Middle East,Mixed
+Turkey,27.8,Middle East,Mixed
+Turkmenistan,26.4,Middle East,Mixed
+Tuvalu,29.3,Oceania,Mixed
+UK,27.3,Europe,Mixed
+USA,28.8,North America,Mixed
+Uganda,22,Africa,Mixed
+Ukraine,26,Europe,Mixed
+Uruguay,26.8,South America,Mixed
+Uzbekistan,26.1,Asia,Mixed
+Vanuatu,26.2,Oceania,Mixed
+Venezuela,27.2,South America,Mixed
+Yemen,25.8,Middle East,Mixed
+Zambia,22.6,Africa,Mixed
+Zimbabwe,23.4,Africa,Mixed
+Afghanistan,21.8,Middle East,Female
+Albania,25.6,Europe,Female
+Algeria,27,Middle East,Female
+Angola,24.6,Africa,Female
+Antigua and Barbuda,29.5,Carribbean,Female
+Argentina,27.5,South America,Female
+Armenia,27.4,Asia,Female
+Australia,26.8,Oceania,Female
+Austria,24.4,Europe,Female
+Azerbaijan,28.1,Asia,Female
+Bahrain,28.6,Middle East,Female
+Bangladesh,21.2,Asia,Female
+Barbados,30,Carribbean,Female
+Belarus,26.2,Europe,Female
+Belgium,24.7,Europe,Female
+Belize,30.2,Central America,Female
+Benin,24.3,Africa,Female
+Bhutan,24.2,Asia,Female
+Bolivia,27.3,South America,Female
+Bosnia and Herzegovina,25.7,Europe,Female
+Botswana,26.6,Africa,Female
+Brazil,26,South America,Female
+Bulgaria,25.3,Europe,Female
+Burkina Faso,22,Africa,Female
+Burundi,21.3,Africa,Female
+Cambodia,22,Asia,Female
+Cameroon,25.1,Africa,Female
+Canada,26.8,North America,Female
+Central African Republic,23.2,Africa,Female
+Chad,22.5,Africa,Female
+Chile,28,South America,Female
+China,23.6,Asia,Female
+Colombia,26.5,South America,Female
+Comoros,25.1,Africa,Female
+Congo,24.1,Africa,Female
+Congo-Brazzaville,26.7,Asia,Female
+Costa Rica,27.1,Central America,Female
+Croatia,24.6,Europe,Female
+Cuba,26.7,Carribbean,Female
+Cyprus,26.3,Middle East,Female
+Czech Republic,26,Europe,Female
+Denmark,24.5,Europe,Female
+Djibouti,23.9,Africa,Female
+Dominica,29,Carribbean,Female
+Dominican Republic,27.4,Carribbean,Female
+Ecuador,27.7,South America,Female
+Egypt,30.7,Middle East,Female
+El Salvador,28,Central America,Female
+Equatorial Guinea,26.1,Africa,Female
+Eritrea,21,Africa,Female
+Estonia,24.3,Europe,Female
+Ethiopia,21,Africa,Female
+Fiji,28.4,Oceania,Female
+Finland,25.3,Europe,Female
+France,24.6,Europe,Female
+Gabon,26.4,Africa,Female
+Gambia,25.1,Africa,Female
+Georgia,27.3,Europe,Female
+Germany,25.6,Europe,Female
+Ghana,25.1,Africa,Female
+Greece,27.2,Europe,Female
+Grenada,28.7,Carribbean,Female
+Guatemala,27.1,Central America,Female
+Guinea,23.3,Africa,Female
+Guinea-Bissau,23.9,Africa,Female
+Guyana,27.6,South America,Female
+Haiti,24,Carribbean,Female
+Honduras,27.3,Central America,Female
+Hungary,25.2,Europe,Female
+Iceland,25.1,Europe,Female
+India,22.1,Asia,Female
+Indonesia,23.4,Asia,Female
+Iran,27.2,Middle East,Female
+Iraq,28.8,Middle East,Female
+Ireland,27.1,Europe,Female
+Israel,26.2,Middle East,Female
+Italy,25.2,Europe,Female
+Jamaica,29.2,Carribbean,Female
+Japan,21.7,Asia,Female
+Jordan,29.7,Middle East,Female
+Kazakhstan,27.5,Asia,Female
+Kenya,24,Africa,Female
+Kiribati,30.5,Oceania,Female
+Kuwait,30.8,Middle East,Female
+Kyrgyzstan,26.8,Asia,Female
+Latvia,25.1,Europe,Female
+Lebanon,27.6,Middle East,Female
+Lesotho,27.1,Africa,Female
+Liberia,24.9,Africa,Female
+Libya,29.6,Middle East,Female
+Lithuania,26,Europe,Female
+Luxembourg,25.5,Europe,Female
+Madagascar,21.2,Africa,Female
+Malawi,23.3,Africa,Female
+Malaysia,25.6,Asia,Female
+Maldives,25.9,Asia,Female
+Mali,23,Africa,Female
+Malta,26.8,Europe,Female
+Mauritania,26.4,Africa,Female
+Mauritius,26.2,Africa,Female
+Mexico,28.7,Central America,Female
+Mongolia,26.4,Asia,Female
+Montenegro,25.5,Europe,Female
+Morocco,25.9,Middle East,Female
+Mozambique,23,Africa,Female
+Myanmar,23.2,Asia,Female
+Namibia,25.6,Africa,Female
+Nepal,22,Asia,Female
+Netherlands,25,Europe,Female
+New Zealand,27.8,Oceania,Female
+Nicaragua,27.8,Central America,Female
+Niger,22.2,Africa,Female
+Nigeria,24,Africa,Female
+Norway,25.2,Europe,Female
+Oman,27.1,Middle East,Female
+Pakistan,24.4,Middle East,Female
+Panama,27.7,Central America,Female
+Papua New Guinea,25.6,Oceania,Female
+Paraguay,26,South America,Female
+Peru,26.9,South America,Female
+Philippines,23.4,Asia,Female
+Poland,25.7,Europe,Female
+Portugal,25.7,Europe,Female
+Qatar,30.1,Middle East,Female
+Romania,24.9,Europe,Female
+Russia,26.8,Europe,Female
+Rwanda,22.7,Africa,Female
+Saint Kitts and Nevis,30.9,Carribbean,Female
+Saint Lucia,30.2,Carribbean,Female
+Saint Vincent and the Grenadines,28.1,Carribbean,Female
+Samoa,33.5,Oceania,Female
+Sao Tome and Principe,25.6,Carribbean,Female
+Saudi Arabia,28.7,Middle East,Female
+Senegal,24.1,Africa,Female
+Serbia,25.2,Europe,Female
+Seychelles,28,Oceania,Female
+Sierra Leone,23.6,Africa,Female
+Singapore,23.2,Asia,Female
+Slovak Republic,25.7,Europe,Female
+Slovenia,26.3,Europe,Female
+Solomon Islands,26.4,Oceania,Female
+Somalia,22.5,Africa,Female
+South Africa,29.1,Africa,Female
+Spain,26,Europe,Female
+Sri Lanka,23.5,Asia,Female
+Sudan,26.7,Africa,Female
+Suriname,28.2,South America,Female
+Swaziland,28.9,Africa,Female
+Sweden,24.9,Europe,Female
+Switzerland,23.8,Europe,Female
+Syria,29,Middle East,Female
+Tajikistan,25.3,Middle East,Female
+Thailand,24.6,Asia,Female
+Timor-Leste,21,Asia,Female
+Togo,24,Africa,Female
+Tonga,33.5,Oceania,Female
+Trinidad and Tobago,29.4,Carribbean,Female
+Tunisia,27.5,Middle East,Female
+Turkey,28.5,Middle East,Female
+Turkmenistan,26.4,Middle East,Female
+Tuvalu,29.9,Oceania,Female
+UK,27.1,Europe,Female
+USA,28.8,North America,Female
+Uganda,23,Africa,Female
+Ukraine,25.8,Europe,Female
+Uruguay,26.9,South America,Female
+Uzbekistan,26.3,Asia,Female
+Vanuatu,26.8,Oceania,Female
+Venezuela,27.1,South America,Female
+Yemen,26.5,Middle East,Female
+Zambia,23.8,Africa,Female
+Zimbabwe,25,Africa,Female
+Afghanistan,21.5,Middle East,Male
+Albania,26.6,Europe,Male
+Algeria,25.5,Middle East,Male
+Angola,23.5,Africa,Male
+Antigua and Barbuda,27.3,Carribbean,Male
+Argentina,27.8,South America,Male
+Armenia,25.9,Asia,Male
+Australia,27.6,Oceania,Male
+Austria,26.5,Europe,Male
+Azerbaijan,26.6,Asia,Male
+Bahrain,28,Middle East,Male
+Bangladesh,20.7,Asia,Male
+Barbados,27.4,Carribbean,Male
+Belarus,27.1,Europe,Male
+Belgium,26.2,Europe,Male
+Belize,27.5,Central America,Male
+Benin,22.6,Africa,Male
+Bhutan,23.4,Asia,Male
+Bolivia,24.6,South America,Male
+Bosnia and Herzegovina,26.5,Europe,Male
+Botswana,22.9,Africa,Male
+Brazil,25.9,South America,Male
+Bulgaria,26.7,Europe,Male
+Burkina Faso,22.1,Africa,Male
+Burundi,20.4,Africa,Male
+Cambodia,21.9,Asia,Male
+Cameroon,23.8,Africa,Male
+Canada,27.6,North America,Male
+Central African Republic,21.6,Africa,Male
+Chad,22.1,Africa,Male
+Chile,27.6,South America,Male
+China,24.2,Asia,Male
+Colombia,25.4,South America,Male
+Comoros,23,Africa,Male
+Congo,22.5,Africa,Male
+Congo-Brazzaville,23.7,Asia,Male
+Costa Rica,26.7,Central America,Male
+Croatia,26.5,Europe,Male
+Cuba,25.6,Carribbean,Male
+Cyprus,27.6,Middle East,Male
+Czech Republic,27.8,Europe,Male
+Denmark,26,Europe,Male
+Djibouti,22.7,Africa,Male
+Dominica,25.1,Carribbean,Male
+Dominican Republic,26,Carribbean,Male
+Ecuador,26.4,South America,Male
+Egypt,27.6,Middle East,Male
+El Salvador,26.8,Central America,Male
+Equatorial Guinea,25,Africa,Male
+Eritrea,20.1,Africa,Male
+Estonia,27,Europe,Male
+Ethiopia,20.2,Africa,Male
+Fiji,26.1,Oceania,Male
+Finland,26.5,Europe,Male
+France,26.1,Europe,Male
+Gabon,24.6,Africa,Male
+Gambia,23,Africa,Male
+Georgia,27.2,Europe,Male
+Germany,27,Europe,Male
+Ghana,23.4,Africa,Male
+Greece,27.4,Europe,Male
+Grenada,25.2,Carribbean,Male
+Guatemala,25.8,Central America,Male
+Guinea,22.1,Africa,Male
+Guinea-Bissau,22.2,Africa,Male
+Guyana,25,South America,Male
+Haiti,24.2,Carribbean,Male
+Honduras,25.5,Central America,Male
+Hungary,27.5,Europe,Male
+Iceland,26.7,Europe,Male
+India,21.8,Asia,Male
+Indonesia,22.4,Asia,Male
+Iran,25.3,Middle East,Male
+Iraq,27.2,Middle East,Male
+Ireland,27.9,Europe,Male
+Israel,26.3,Middle East,Male
+Italy,26.8,Europe,Male
+Jamaica,25.5,Carribbean,Male
+Japan,23.6,Asia,Male
+Jordan,28.2,Middle East,Male
+Kazakhstan,27.4,Asia,Male
+Kenya,21.9,Africa,Male
+Kiribati,28.7,Oceania,Male
+Kuwait,29.5,Middle East,Male
+Kyrgyzstan,25.6,Asia,Male
+Latvia,26.8,Europe,Male
+Lebanon,28,Middle East,Male
+Lesotho,22.7,Africa,Male
+Liberia,23.2,Africa,Male
+Libya,27.2,Middle East,Male
+Lithuania,27.3,Europe,Male
+Luxembourg,27.6,Europe,Male
+Madagascar,20.9,Africa,Male
+Malawi,22.3,Africa,Male
+Malaysia,25,Asia,Male
+Maldives,24.2,Asia,Male
+Mali,22.6,Africa,Male
+Malta,27.5,Europe,Male
+Mauritania,23.2,Africa,Male
+Mauritius,25,Africa,Male
+Mexico,27.5,Central America,Male
+Mongolia,25.5,Asia,Male
+Montenegro,26.5,Europe,Male
+Morocco,25.2,Middle East,Male
+Mozambique,21.6,Africa,Male
+Myanmar,22.1,Asia,Male
+Namibia,22.9,Africa,Male
+Nepal,22.4,Asia,Male
+Netherlands,25.9,Europe,Male
+New Zealand,28,Oceania,Male
+Nicaragua,26,Central America,Male
+Niger,21.3,Africa,Male
+Nigeria,22.8,Africa,Male
+Norway,26.9,Europe,Male
+Oman,26.8,Middle East,Male
+Pakistan,23.3,Middle East,Male
+Panama,26.4,Central America,Male
+Papua New Guinea,25,Oceania,Male
+Paraguay,25.6,South America,Male
+Peru,25.7,South America,Male
+Philippines,22.9,Asia,Male
+Poland,27,Europe,Male
+Portugal,26.7,Europe,Male
+Qatar,29,Middle East,Male
+Romania,25.7,Europe,Male
+Russia,26.1,Europe,Male
+Rwanda,21.3,Africa,Male
+Saint Kitts and Nevis,28.4,Carribbean,Male
+Saint Lucia,28.9,Carribbean,Male
+Saint Vincent and the Grenadines,26.5,Carribbean,Male
+Samoa,29.9,Oceania,Male
+Sao Tome and Principe,23.9,Carribbean,Male
+Saudi Arabia,28.3,Middle East,Male
+Senegal,21.8,Africa,Male
+Serbia,26.4,Europe,Male
+Seychelles,25.6,Oceania,Male
+Sierra Leone,22,Africa,Male
+Singapore,24.3,Asia,Male
+Slovak Republic,27.4,Europe,Male
+Slovenia,27.5,Europe,Male
+Solomon Islands,24.5,Oceania,Male
+Somalia,21.2,Africa,Male
+South Africa,25.4,Africa,Male
+Spain,27.4,Europe,Male
+Sri Lanka,22.5,Asia,Male
+Sudan,23.7,Africa,Male
+Suriname,26.5,South America,Male
+Swaziland,24.1,Africa,Male
+Sweden,26.7,Europe,Male
+Switzerland,26.7,Europe,Male
+Syria,27.2,Middle East,Male
+Tajikistan,25.5,Middle East,Male
+Thailand,23.6,Asia,Male
+Timor-Leste,21.5,Asia,Male
+Togo,22.4,Africa,Male
+Tonga,30.4,Oceania,Male
+Trinidad and Tobago,27.9,Carribbean,Male
+Tunisia,26,Middle East,Male
+Turkey,27.1,Middle East,Male
+Turkmenistan,26.4,Middle East,Male
+Tuvalu,28.7,Oceania,Male
+UK,27.5,Europe,Male
+USA,28.8,North America,Male
+Uganda,21,Africa,Male
+Ukraine,26.4,Europe,Male
+Uruguay,26.7,South America,Male
+Uzbekistan,25.9,Asia,Male
+Vanuatu,25.6,Oceania,Male
+Venezuela,27.4,South America,Male
+Yemen,25.2,Middle East,Male
+Zambia,21.5,Africa,Male
+Zimbabwe,21.8,Africa,Male
